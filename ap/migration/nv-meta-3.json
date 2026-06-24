@@ -1,0 +1,154 @@
+{
+  "10190": {
+    "_nv_eyebrow": "Cognitive · Neuro",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A neuropeptide preparation studied for neuroprotection.",
+    "_nv_spec_1": "Neurotrophic peptide complex",
+    "_nv_spec_2": "{mg} per vial — research solution",
+    "_nv_spec_3": "Lab tested · <strong>research grade</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":60,\"price\":89.99}]",
+    "_nv_purity_label": "Research grade"
+  },
+  "10191": {
+    "_nv_eyebrow": "Cognitive · Anti-Aging",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A tripeptide researched for cognition and cellular protection.",
+    "_nv_spec_1": "Tripeptide bioregulator",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":5,\"price\":44.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10192": {
+    "_nv_eyebrow": "Immune · Recovery",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A peptide studied for immune modulation.",
+    "_nv_spec_1": "28-amino-acid immune peptide",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":5,\"price\":44.0}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10193": {
+    "_nv_eyebrow": "Antimicrobial · Healing",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A cathelicidin peptide researched for antimicrobial and repair activity.",
+    "_nv_spec_1": "Human cathelicidin fragment",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":5,\"price\":59.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10194": {
+    "_nv_eyebrow": "Nerve · Anti-Inflammatory",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A peptide studied for nerve repair and inflammation research.",
+    "_nv_spec_1": "Erythropoietin-derived peptide",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":10,\"price\":69.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10195": {
+    "_nv_eyebrow": "Libido · Vitality",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A melanocortin peptide researched in sexual-function studies.",
+    "_nv_spec_1": "Bremelanotide (melanocortin agonist)",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":10,\"price\":39.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10196": {
+    "_nv_eyebrow": "Hormone · Support",
+    "_nv_tagline": "A gonadotropin studied in hormone and fertility research.",
+    "_nv_spec_1": "Human chorionic gonadotropin",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "Lab tested · <strong>research grade</strong>",
+    "_nv_unit": "iu",
+    "_nv_variants": "[{\"mg\":5000,\"price\":39.99}]",
+    "_nv_purity_label": "Research grade"
+  },
+  "10197": {
+    "_nv_eyebrow": "Hormone · Fertility",
+    "_nv_tagline": "A gonadotropin preparation researched in reproductive studies.",
+    "_nv_spec_1": "Menotropins (FSH / LH)",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "Lab tested · <strong>research grade</strong>",
+    "_nv_unit": "iu",
+    "_nv_variants": "[{\"mg\":75,\"price\":39.99}]",
+    "_nv_purity_label": "Research grade"
+  },
+  "10198": {
+    "_nv_eyebrow": "Hormone · Vitality",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A peptide studied for reproductive-hormone signaling.",
+    "_nv_spec_1": "Kisspeptin-derived decapeptide",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":5,\"price\":59.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10199": {
+    "_nv_eyebrow": "Mood · Social",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A neuropeptide researched in social and mood studies.",
+    "_nv_spec_1": "Nonapeptide hormone",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":2,\"price\":24.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10200": {
+    "_nv_eyebrow": "Sleep · Recovery",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A peptide studied for sleep regulation.",
+    "_nv_spec_1": "Delta sleep-inducing peptide",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":5,\"price\":24.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10201": {
+    "_nv_eyebrow": "Antioxidant · Skin",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A tripeptide antioxidant researched in cellular and skin studies.",
+    "_nv_spec_1": "Master antioxidant tripeptide",
+    "_nv_spec_2": "{mg} per vial — research solution",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":1500,\"price\":49.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10202": {
+    "_nv_eyebrow": "Cosmetic · Skin",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "An octapeptide researched in cosmetic and skin studies.",
+    "_nv_spec_1": "Acetyl octapeptide-3",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":10,\"price\":39.99}]",
+    "_nv_purity_label": "99%+ purity"
+  },
+  "10203": {
+    "_nv_eyebrow": "Tanning · Pigment",
+    "_nv_title_em": "Peptide",
+    "_nv_tagline": "A melanocortin peptide studied in pigmentation research.",
+    "_nv_spec_1": "Afamelanotide (a-MSH analog)",
+    "_nv_spec_2": "{mg} per vial — lyophilized powder",
+    "_nv_spec_3": "HPLC verified at <strong>99%+ purity</strong>",
+    "_nv_unit": "mg",
+    "_nv_variants": "[{\"mg\":10,\"price\":39.99}]",
+    "_nv_purity_label": "99%+ purity"
+  }
+}

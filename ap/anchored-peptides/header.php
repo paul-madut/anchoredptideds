@@ -83,7 +83,6 @@ function ap_default_menu() {
     <a href="<?php echo esc_url( $shop ); ?>"><?php esc_html_e( 'Shop', 'anchored-peptides' ); ?></a>
     <a href="<?php echo esc_url( home_url( '/learn/' ) ); ?>"><?php esc_html_e( 'Learn', 'anchored-peptides' ); ?></a>
     <a href="<?php echo esc_url( home_url( '/coa-library/' ) ); ?>"><?php esc_html_e( 'COAs & Testing', 'anchored-peptides' ); ?></a>
-    <a href="<?php echo esc_url( home_url( '/help/' ) ); ?>"><?php esc_html_e( 'Help & Support', 'anchored-peptides' ); ?></a>
     <?php
 }
 
