@@ -1,0 +1,15 @@
+/*
+Theme Name: Anchored Peptides
+Theme URI: https://anchoredpeptides.com
+Author: Anchored Peptides
+Description: Research-grade peptide WooCommerce theme. Newsreader + Hanken Grotesk typography, warm olive/cream palette, sticky blurred nav, per-product meta + variant pills. Companion to the Anchored Peptides Homepage plugin.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+Text Domain: anchored-peptides
+Tags: e-commerce, custom-colors, custom-logo, custom-menu, woocommerce, translation-ready
+*/
+
+/* Actual styles live in assets/css/tokens.css + assets/css/main.css (enqueued in functions.php). */

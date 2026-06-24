@@ -1,8 +1,0 @@
-[    5063ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/linecon.css?ver=7.0:0
-[    5070ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/nectar-brands.css?ver=7.0:0
-[    5070ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/fonts/svg/font/style.css?ver=7.0:0
-[    5071ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/iconsmind.css?ver=7.0:0
-[    5128ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/steadysets.css?ver=7.0:0
-[    5219ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://nattyvision.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
-[    5525ms] TypeError: $(...).pointer is not a function
-    at https://nattyvision.com/wp-admin/site-health.php?tab=debug:3889:43

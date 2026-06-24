@@ -1,0 +1,55 @@
+/* =========================================================
+   Anchored Peptides — Design Tokens (single source of truth)
+   Loaded by BOTH the theme and the homepage plugin so the
+   brand palette + type scale live in exactly one place.
+   To reskin for a new brand: edit the variables below.
+   ========================================================= */
+:root{
+    /* Surfaces */
+    --ap-bg:        #ECE7DA;  /* page cream            */
+    --ap-bg2:       #F4F0E6;  /* card / light cream    */
+    --ap-bg3:       #FBF9F3;  /* lightest / hover      */
+    --ap-bg-card:   #F4F0E6;
+
+    /* Ink / text */
+    --ap-ink:       #2C2E22;  /* primary text          */
+    --ap-ink2:      #3C3E32;
+    --ap-muted:     #6E6A5C;  /* secondary text        */
+    --ap-muted2:    #8A8676;
+
+    /* Brand greens */
+    --ap-olive:     #3E412E;  /* primary buttons       */
+    --ap-olive-h:   #4A4D38;  /* button hover          */
+    --ap-dark:      #33352A;  /* dark section bg       */
+    --ap-dark2:     #2C2E22;  /* footer / darkest      */
+    --ap-taupe:     #6E6453;  /* taupe band            */
+
+    /* On-dark text */
+    --ap-cream:     #F4F0E6;
+    --ap-cream2:    #D9D3C2;
+    --ap-cream3:    #B9B3A0;
+
+    /* Lines */
+    --ap-border:    #DCD5C4;
+    --ap-border2:   #C9C1AC;
+
+    /* Accents */
+    --ap-blue:      #2B5687;  /* buy-it-now / checkout */
+    --ap-blue-h:    #24496f;
+    --ap-rust:      #A8503B;  /* sale / remove / urgent*/
+    --ap-gold:      #B0863A;  /* star ratings          */
+    --ap-green-ok:  #3E6F4E;  /* in-stock dot          */
+
+    /* Radii */
+    --ap-r:    16px;
+    --ap-rs:   12px;
+    --ap-rx:   8px;
+    --ap-pill: 40px;
+
+    /* Type */
+    --ap-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --ap-sans:  'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+    /* Layout */
+    --ap-maxw: 1280px;
+}
