@@ -1,0 +1,11 @@
+[    2466ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/nectar-brands.css?ver=7.0:0
+[    2467ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/fonts/svg/font/style.css?ver=7.0:0
+[    2470ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/iconsmind.css?ver=7.0:0
+[    2490ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/steadysets.css?ver=7.0:0
+[    2523ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/linecon.css?ver=7.0:0
+[    2526ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://nattyvision.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[    2720ms] [WARNING] List with items prop is deprecated is deprecated and will be removed in version 9.0.0. Note: See ExperimentalList / ExperimentalListItem for the new API that will replace this component in future versions. @ https://nattyvision.com/wp-content/plugins/gutenberg/build/scripts/deprecated/index.min.js?ver=990e85f234fee8f7d446:0
+[    5105ms] TypeError: $(...).pointer is not a function
+    at https://nattyvision.com/wp-admin/admin.php?page=wc-settings&tab=checkout:3173:43
+[    9803ms] [WARNING] The resource https://nattyvision.com/wp-content/plugins/woocommerce/assets/client/admin/embed/style.css?ver=ee7da5227b1c058d9675 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://nattyvision.com/wp-admin/admin.php?page=wc-settings&tab=checkout:0
+[    9803ms] [WARNING] The resource https://nattyvision.com/wp-content/plugins/woocommerce/assets/client/admin/components/style.css?ver=693b689130c168cfcafb was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://nattyvision.com/wp-admin/admin.php?page=wc-settings&tab=checkout:0

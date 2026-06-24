@@ -1,0 +1,19 @@
+[    2528ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/steadysets.css?ver=7.0:0
+[    2529ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/linecon.css?ver=7.0:0
+[    2529ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/fonts/svg/font/style.css?ver=7.0:0
+[    2529ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/nectar-brands.css?ver=7.0:0
+[    2529ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/iconsmind.css?ver=7.0:0
+[    2750ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://nattyvision.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[    6227ms] TypeError: $(...).pointer is not a function
+    at https://nattyvision.com/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product:4741:39
+[    6249ms] TypeError: $(...).pointer is not a function
+    at https://nattyvision.com/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product:4775:43
+[    6255ms] TypeError: Cannot read properties of undefined (reading 'indexOf')
+    at HTMLDocument.<anonymous> (https://nattyvision.com/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product:2563:21)
+    at HTMLDocument.dispatch (https://nattyvision.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1:2:40035)
+    at ce.event.add.v.handle (https://nattyvision.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1:2:38006)
+    at Object.trigger (https://nattyvision.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1:2:70124)
+    at l (https://nattyvision.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1:2:77934)
+    at XMLHttpRequest.<anonymous> (https://nattyvision.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1:2:80265)
+[   11090ms] [WARNING] The resource https://nattyvision.com/wp-content/plugins/woocommerce/assets/client/admin/embed/style.css?ver=ee7da5227b1c058d9675 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://nattyvision.com/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product:0
+[   11090ms] [WARNING] The resource https://nattyvision.com/wp-content/plugins/woocommerce/assets/client/admin/components/style.css?ver=693b689130c168cfcafb was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://nattyvision.com/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product:0

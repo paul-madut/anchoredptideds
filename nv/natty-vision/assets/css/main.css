@@ -1,0 +1,881 @@
+/* =========================================================
+   Natty Vision Theme — main.css
+   Matches homepage plugin design system exactly.
+   ========================================================= */
+
+:root {
+    --bg: #f2f0eb;
+    --bg2: #e9e7e1;
+    --bg-card: #eae8e2;
+    --sage: #c5d4c0;
+    --sage-s: #dce5d8;
+    --sage-d: #a8bfa2;
+    --dark: #1a1e1c;
+    --dark2: #232826;
+    --green: #2d6a4f;
+    --green-l: #40916c;
+    --green-b: #52b788;
+    --text: #1a1e1c;
+    --t2: #4a4f4c;
+    --t3: #7a7f7c;
+    --ti: #f2f0eb;
+    --ti2: #b0aea8;
+    --brd: #d4d2cc;
+    --brd2: #c4c2bc;
+    --r: 16px;
+    --rs: 12px;
+    --rx: 8px;
+    --rp: 100px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: 'Neue Montreal', -apple-system, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    font-size: 15px;
+    line-height: 1.6;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; transition: opacity .15s; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.1; margin: 0 0 .5em; letter-spacing: -.02em; }
+
+.nv-container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+/* =========================================================
+   Announce bar
+   ========================================================= */
+.nv-announce {
+    background: var(--dark);
+    color: var(--ti2);
+    text-align: center;
+    padding: 11px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+}
+.nv-announce strong { color: var(--ti); }
+.nv-announce a {
+    color: var(--green-b);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-left: 8px;
+}
+
+/* =========================================================
+   Sticky nav (matches homepage)
+   ========================================================= */
+.nv-nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(242,240,235,.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--brd);
+    padding: 0 40px;
+}
+.nv-nav-i {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+.nv-nl { display: flex; align-items: center; text-decoration: none; }
+.nv-nl img, .nv-nl svg { height: 38px; width: auto; }
+
+.nv-nc {
+    display: flex;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--brd);
+    border-radius: var(--rp);
+    padding: 4px;
+    gap: 0;
+}
+.nv-nc a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 8px 18px;
+    border-radius: var(--rp);
+    color: var(--t2);
+    transition: all .3s;
+}
+.nv-nc a:hover, .nv-nc a.on, .nv-nc a.current-menu-item { color: var(--text); background: var(--bg); }
+
+.nv-nr-group { display: flex; align-items: center; gap: 18px; }
+.nv-nr {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--t2);
+    transition: color .3s;
+}
+.nv-nr:hover { color: var(--text); }
+.nv-nr-cart {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--t2);
+    transition: color .3s;
+}
+.nv-nr-cart:hover { color: var(--text); }
+.nv-cart-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: var(--green-b);
+    color: var(--dark);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+}
+
+/* =========================================================
+   Single product page
+   ========================================================= */
+.nv-product-main { padding: 64px 0 80px; }
+.nv-product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+}
+
+/* Image card */
+.nv-gallery-card {
+    background: var(--sage-s);
+    border-radius: 24px;
+    padding: 0;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid var(--brd);
+    overflow: hidden;
+}
+.nv-gallery-card .nv-gallery-img,
+.nv-gallery-card img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+.nv-gallery-placeholder { width: 60%; aspect-ratio: 1; }
+.nv-gallery-placeholder svg { width: 100%; height: 100%; opacity: 0.16; }
+.nv-gallery-sku {
+    position: absolute;
+    bottom: 24px;
+    left: 28px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--t3);
+    font-family: 'DM Mono', monospace;
+}
+.nv-gallery-purity {
+    position: absolute;
+    bottom: 24px;
+    right: 28px;
+    font-size: 11px;
+    color: var(--green);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* WooCommerce gallery thumbnails */
+.nv-gallery-card .flex-control-thumbs {
+    position: absolute;
+    bottom: 60px;
+    left: 28px;
+    right: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.nv-gallery-card .flex-control-thumbs li { flex: 0 0 48px; }
+.nv-gallery-card .flex-control-thumbs img {
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: .55;
+    transition: opacity .15s;
+}
+.nv-gallery-card .flex-control-thumbs img:hover,
+.nv-gallery-card .flex-control-thumbs img.flex-active { opacity: 1; }
+
+/* Summary */
+.nv-summary { padding-top: 4px; }
+
+.nv-eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 18px;
+    padding: 5px 12px;
+    background: rgba(82,183,136,0.15);
+    color: var(--green);
+    border-radius: var(--rp);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+}
+.nv-eyebrow-pill::before { content: '+'; font-weight: 700; }
+
+.nv-product-eyebrow {
+    margin: 0 0 8px;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--t3);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+}
+
+.nv-product-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 4.5vw, 56px);
+    font-weight: 400;
+    margin: 0 0 16px;
+    letter-spacing: -.025em;
+    line-height: 1.05;
+}
+.nv-product-title em { font-style: italic; }
+
+.nv-product-tagline {
+    margin: 0 0 32px;
+    color: var(--t2);
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 520px;
+}
+
+/* Spec list */
+.nv-spec-list {
+    list-style: none;
+    margin: 0 0 36px;
+    padding: 0;
+    border-top: 1px solid var(--brd);
+}
+.nv-spec-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--brd);
+    font-size: 14px;
+    line-height: 1.5;
+}
+.nv-spec-check {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--green);
+    margin-top: 2px;
+}
+.nv-spec-list strong { font-weight: 500; }
+
+/* Variant pills */
+.nv-variant-block { margin: 0 0 28px; }
+.nv-variant-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0 0 12px;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--t3);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+}
+.nv-variant-label-active {
+    font-size: 13px;
+    color: var(--text);
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: 'Neue Montreal', sans-serif;
+}
+.nv-variant-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.nv-variant-pill {
+    background: transparent;
+    border: 1px solid var(--brd2);
+    border-radius: var(--rp);
+    padding: 11px 22px;
+    font-size: 12px;
+    color: var(--text);
+    transition: all 0.15s;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+    min-width: 72px;
+    text-transform: uppercase;
+}
+.nv-variant-pill:hover:not(.active):not(:disabled) {
+    border-color: var(--dark);
+    background: var(--bg-card);
+}
+.nv-variant-pill.active {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: var(--ti);
+}
+.nv-variant-pill:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* Price */
+.nv-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0 0 8px;
+}
+.nv-product-price {
+    font-family: 'Instrument Serif', serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--text);
+}
+.nv-product-price del { color: var(--t3); font-size: 36px; margin-right: 8px; }
+.nv-product-price ins { text-decoration: none; }
+.nv-product-price-suffix {
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: var(--t3);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+}
+
+.nv-stock-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 28px;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+}
+.nv-stock-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.nv-stock-in { color: var(--green); }
+.nv-stock-in .nv-stock-dot { background: var(--green-b); }
+.nv-stock-out { color: #B91C1C; }
+.nv-stock-out .nv-stock-dot { background: #B91C1C; }
+.nv-stock-low { color: #D97706; }
+.nv-stock-low .nv-stock-dot { background: #D97706; }
+
+/* =========================================================
+   WooCommerce add-to-cart styling — matches v4 button design
+   ========================================================= */
+.nv-cart-row {
+    margin: 0 0 24px;
+}
+.nv-cart-row form.cart {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0;
+}
+.nv-cart-row .quantity {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--brd);
+    border-radius: var(--rx);
+    overflow: hidden;
+    height: 52px;
+}
+.nv-cart-row .quantity input.qty {
+    border: 0;
+    background: transparent;
+    width: 60px;
+    height: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    color: var(--text);
+    -moz-appearance: textfield;
+}
+.nv-cart-row .quantity input.qty::-webkit-outer-spin-button,
+.nv-cart-row .quantity input.qty::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.nv-cart-row button.single_add_to_cart_button,
+.nv-cart-row .single_add_to_cart_button {
+    background: var(--dark) !important;
+    color: var(--ti) !important;
+    border: 0 !important;
+    padding: 0 36px !important;
+    height: 52px !important;
+    border-radius: var(--rx) !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 11px !important;
+    letter-spacing: .14em !important;
+    text-transform: uppercase !important;
+    flex: 1;
+    min-width: 220px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s !important;
+    font-weight: 400 !important;
+    cursor: pointer;
+}
+.nv-cart-row button.single_add_to_cart_button:hover {
+    background: #2a302d !important;
+    transform: translateY(-1px);
+}
+.nv-cart-row button.single_add_to_cart_button:disabled {
+    background: var(--bg-card) !important;
+    color: var(--t3) !important;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Variations table styling */
+.nv-cart-row table.variations {
+    width: 100%;
+    margin: 0 0 16px;
+    border-collapse: collapse;
+}
+.nv-cart-row table.variations th,
+.nv-cart-row table.variations td {
+    padding: 8px 0;
+    text-align: left;
+    font-size: 13px;
+}
+.nv-cart-row table.variations th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--t3);
+    text-transform: uppercase;
+    font-weight: 400;
+    width: 140px;
+}
+.nv-cart-row table.variations select {
+    border: 1px solid var(--brd);
+    border-radius: var(--rx);
+    padding: 10px 14px;
+    background: var(--bg);
+    font-size: 14px;
+    font-family: inherit;
+    width: 100%;
+}
+.nv-cart-row .reset_variations { font-size: 11px; color: var(--t3); }
+
+/* Disclaimer */
+.nv-disclaimer {
+    margin: 28px 0 0;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--green);
+    line-height: 1.6;
+    letter-spacing: .01em;
+    max-width: 520px;
+    font-family: 'Instrument Serif', serif;
+}
+
+/* =========================================================
+   Pill tabs
+   ========================================================= */
+.nv-product-tabs {
+    margin: 80px 0 0;
+    padding: 40px 0 0;
+    border-top: 1px solid var(--brd);
+}
+.nv-tabs-list {
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.nv-tabs-list li {
+    background: transparent;
+    border: 1px solid var(--brd2);
+    border-radius: var(--rp);
+    transition: all .15s;
+}
+.nv-tabs-list li.active { background: var(--dark); border-color: var(--dark); }
+.nv-tabs-list li button {
+    background: transparent;
+    border: 0;
+    padding: 10px 20px;
+    color: var(--t2);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+}
+.nv-tabs-list li.active button { color: var(--ti); }
+.nv-tabs-list li:not(.active):hover { border-color: var(--dark); background: var(--bg-card); }
+.nv-tabs-list li:not(.active):hover button { color: var(--text); }
+.nv-tab-panel {
+    display: none;
+    padding: 8px 0 0;
+    font-size: 15px;
+    line-height: 1.75;
+    max-width: 760px;
+    color: var(--text);
+}
+.nv-tab-panel.active { display: block; }
+.nv-tab-panel p { margin: 0 0 16px; }
+
+/* =========================================================
+   Shop archive
+   ========================================================= */
+.nv-shop-main { padding: 48px 0 64px; }
+.nv-page-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px;
+    font-weight: 400;
+    margin: 0 0 32px;
+    letter-spacing: -0.02em;
+}
+
+/* Category filter pills */
+.nv-shop-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+.nv-shop-pill {
+    padding: 8px 20px;
+    border-radius: var(--rp);
+    border: 1px solid var(--brd);
+    background: transparent;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--t2);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: all .15s;
+}
+.nv-shop-pill:hover { background: var(--bg2); color: var(--text); }
+.nv-shop-pill.active {
+    background: var(--dark);
+    color: var(--ti);
+    border-color: var(--dark);
+}
+
+/* Category sections */
+.nv-cat-section { margin-bottom: 48px; }
+.nv-cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--brd);
+}
+.nv-cat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--t3);
+}
+.nv-cat-viewall {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--t3);
+    text-transform: uppercase;
+}
+.nv-cat-viewall:hover { color: var(--text); }
+
+/* Product card grid */
+.nv-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+/* Individual product card */
+.nv-cat-card {
+    background: var(--sage-s);
+    border: 1px solid var(--brd);
+    border-radius: var(--r);
+    overflow: hidden;
+    display: block;
+    transition: transform .2s, border-color .2s;
+}
+.nv-cat-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--brd2);
+}
+
+/* Card thumbnail */
+.nv-cat-card-thumb {
+    aspect-ratio: 1;
+    background: var(--sage-s);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+.nv-cat-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.nv-cat-card-placeholder {
+    width: 40%;
+    color: var(--sage-d);
+    opacity: 0.3;
+}
+.nv-cat-card-placeholder svg { width: 100%; height: auto; }
+
+/* Badge (Top Seller, New, etc.) */
+.nv-cat-card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--dark);
+    color: var(--ti);
+    padding: 4px 12px;
+    border-radius: var(--rp);
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Card info section */
+.nv-cat-card-info {
+    padding: 16px 18px 18px;
+}
+.nv-cat-card-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green);
+    display: block;
+    margin-bottom: 4px;
+}
+.nv-cat-card-title {
+    font-family: 'Neue Montreal', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0 0 10px;
+    color: var(--text);
+    line-height: 1.3;
+}
+.nv-cat-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nv-cat-card-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+}
+.nv-cat-card-price del {
+    color: var(--t3);
+    font-weight: 400;
+}
+.nv-cat-card-price ins {
+    text-decoration: none;
+}
+.nv-cat-card-stock {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.nv-cat-card-stock.nv-stock-in { color: var(--green); }
+.nv-cat-card-stock.nv-stock-low { color: #b8860b; }
+.nv-cat-card-stock.nv-stock-out { color: #c0392b; }
+
+/* Legacy classes (keep for fallback) */
+ul.products {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 640px) {
+    .nv-cat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .nv-shop-pills { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; gap: 6px; }
+    .nv-shop-pill { padding: 6px 14px; font-size: 11px; white-space: nowrap; flex-shrink: 0; }
+    .nv-cat-card-info { padding: 10px 12px 14px; }
+    .nv-cat-card-title { font-size: 14px; }
+    .nv-cat-card-price { font-size: 13px; }
+    .nv-cat-card-eyebrow { font-size: 9px; }
+    .nv-cat-card-stock { font-size: 9px; }
+    .nv-cat-card-bottom { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .nv-page-title { font-size: 36px; margin-bottom: 20px; }
+}
+
+/* =========================================================
+   Cart, checkout, account fallback
+   ========================================================= */
+.woocommerce table.shop_table {
+    background: var(--bg-card);
+    border-radius: var(--r);
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid var(--brd);
+}
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td {
+    border-color: var(--brd);
+    padding: 14px;
+}
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button {
+    background: var(--dark);
+    color: var(--ti);
+    border-radius: var(--rx);
+    padding: 12px 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border: 0;
+    font-weight: 400;
+}
+.woocommerce a.button:hover,
+.woocommerce button.button:hover { background: #2a302d; }
+
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+    background: var(--bg-card);
+    border-radius: var(--rs);
+    border-top-color: var(--green-b);
+    padding: 16px 20px;
+}
+
+/* =========================================================
+   Posts / pages
+   ========================================================= */
+.nv-main { padding: 48px 0 64px; }
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.nv-footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--brd);
+    text-align: center;
+    font-size: 12px;
+    color: var(--t3);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   Hide Jetpack/social shares — bulletproof targeting
+   ========================================================= */
+.sharedaddy,
+.sd-sharing-enabled,
+.sd-sharing,
+.sd-block,
+.jp-relatedposts,
+.jp-likes-widget,
+.product .sharedaddy,
+.product .sd-sharing,
+.sassy_share_buttons_container,
+.heateor_sss_button_container,
+.heateor_sss_horizontal_sharing,
+.addtoany_share_save_container,
+.a2a_kit,
+.swp_social_panel,
+.essb_links,
+.simple-social-icons,
+.fb_iframe_widget,
+[class*="social-share"],
+[class*="share-buttons"]:not(.nv-variant-pills),
+[id*="share-buttons"],
+[id*="sharing"],
+.woocommerce-product-share { display: none !important; }
+
+/* =========================================================
+   Hide WooCommerce default variation dropdown — pills are the only selector
+   ========================================================= */
+.nv-cart-row table.variations,
+.nv-cart-row .variations_form .variations,
+.nv-cart-row .reset_variations,
+.nv-cart-row .single_variation_wrap .woocommerce-variation-availability,
+.nv-cart-row .single_variation_wrap .woocommerce-variation-description,
+.nv-cart-row .single_variation_wrap .woocommerce-variation-price,
+form.variations_form > .variations,
+form.variations_form > .reset_variations { display: none !important; }
+
+/* But keep the variations_form itself visible (it holds the qty + add-to-cart button) */
+.nv-cart-row form.variations_form { display: flex !important; }
+.nv-cart-row form.variations_form .single_variation_wrap { width: 100%; }
+.nv-cart-row form.variations_form .woocommerce-variation { display: none !important; }
+.nv-cart-row form.variations_form .woocommerce-variation-add-to-cart { display: flex !important; }
+
+/* Hide stock messages that conflict with our pill-driven stock indicator */
+.nv-product .stock,
+.nv-product p.stock,
+.nv-summary > .stock,
+.nv-summary .woocommerce-variation-availability { display: none !important; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 1024px) {
+    .nv-product-layout { gap: 48px; }
+    .nv-product-price { font-size: 52px; }
+}
+@media (max-width: 900px) {
+    .nv-nc { display: none; }
+    .nv-nav-bar { padding: 0 20px; }
+}
+@media (max-width: 780px) {
+    .nv-product-main { padding: 32px 0 48px; }
+    .nv-product-layout { grid-template-columns: 1fr; gap: 32px; }
+    .nv-gallery-card { aspect-ratio: 4/5; padding: 0; }
+    .nv-product-price { font-size: 44px; }
+}
+@media (max-width: 480px) {
+    .nv-container { padding: 0 20px; }
+    .nv-cart-row form.cart { flex-direction: column; align-items: stretch; }
+    .nv-cart-row button.single_add_to_cart_button { width: 100%; flex: none; }
+    .nv-cart-row .quantity { width: 100%; justify-content: space-between; }
+    .nv-cart-row .quantity input.qty { flex: 1; }
+}

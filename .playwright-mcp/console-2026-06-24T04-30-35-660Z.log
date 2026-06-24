@@ -1,0 +1,15 @@
+[    3593ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/steadysets.css?ver=7.0:0
+[    3594ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/linecon.css?ver=7.0:0
+[    3595ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/nectar-brands.css?ver=7.0:0
+[    3595ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/iconsmind.css?ver=7.0:0
+[    3596ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/fonts/svg/font/style.css?ver=7.0:0
+[    3751ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://nattyvision.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[    4122ms] TypeError: $(...).pointer is not a function
+    at https://nattyvision.com/wp-admin/edit.php?post_type=page&orderby=title&order=asc:5714:43
+[    5843ms] [ERROR] Failed to load resource: the server responded with a status of 500 () @ https://nattyvision.com/wp-json/aioseo/v1/posts-list/load-details-column/:0
+[    5864ms] Error: Parser is unable to parse the response
+    at D.<anonymous> (https://nattyvision.com/wp-content/plugins/all-in-one-seo-pack/dist/Lite/assets/js/vendor-other.ac1169a2.js:9:27058)
+    at t.emit (https://nattyvision.com/wp-content/plugins/all-in-one-seo-pack/dist/Lite/assets/js/vendor-other.ac1169a2.js:6:8862)
+    at XMLHttpRequest.<anonymous> (https://nattyvision.com/wp-content/plugins/all-in-one-seo-pack/dist/Lite/assets/js/vendor-other.ac1169a2.js:10:1613)
+[  254785ms] Error: Angie is not available
+    at Hc.waitForReady (https://nattyvision.com/wp-content/plugins/elementor/assets/js/packages/editor-mcp/editor-mcp.min.js?ver=4.1.2:7:186358)

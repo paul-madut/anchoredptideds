@@ -1,0 +1,9 @@
+[    3161ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/iconsmind.css?ver=7.0:0
+[    3163ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/fonts/svg/font/style.css?ver=7.0:0
+[    3223ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/steadysets.css?ver=7.0:0
+[    3224ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/linecon.css?ver=7.0:0
+[    3224ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://nattyvision.com/wp-content/themes/natty-vision/css/nectar-brands.css?ver=7.0:0
+[    3229ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://nattyvision.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[    6347ms] TypeError: $(...).pointer is not a function
+    at https://nattyvision.com/wp-admin/plugins.php:5800:43
+[    6360ms] [LOG] modal error: rbm_tracking_firstgo @ https://nattyvision.com/wp-content/plugins/revslider/admin/assets/js/plugins/utils.min.js?ver=6.7.29:11
