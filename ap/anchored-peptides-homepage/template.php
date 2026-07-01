@@ -14,7 +14,15 @@ get_header();
 $shop    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' );
 $learn   = home_url( '/learn/' );
 $coa     = home_url( '/coa-library/' );
-$hero    = function_exists( 'aph_img' ) ? aph_img( 'hero-vials.png' ) : APH_URL . 'images/hero-vials.png';
+
+// Hero image: per-site sideloaded media (option) with the bundled vials as fallback.
+$hero_default = function_exists( 'aph_img' ) ? aph_img( 'hero-vials.png' ) : APH_URL . 'images/hero-vials.png';
+$hero_id      = (int) get_option( 'ap_hero_image_id' );
+$hero         = $hero_id ? ( wp_get_attachment_image_url( $hero_id, 'large' ) ?: wp_get_attachment_image_url( $hero_id, 'full' ) ?: $hero_default ) : $hero_default;
+
+// Brand copy helper (falls back to shipped defaults when a site sets no override).
+$c = function_exists( 'ap_copy' ) ? 'ap_copy' : null;
+$copy = function ( $key, $default ) use ( $c ) { return $c ? call_user_func( $c, $key, $default ) : $default; };
 
 // Category icons keyed by Natty Vision slug.
 $cat_icons = array(
@@ -30,24 +38,24 @@ $cat_icons = array(
 <!-- ── HERO ── -->
 <section class="ap-hero">
     <div class="ap-hero-c">
-        <p class="ap-eyebrow"><?php esc_html_e( 'Research-grade quality', 'anchored-peptides' ); ?></p>
-        <h1><?php esc_html_e( 'Peptides That', 'anchored-peptides' ); ?> <em><?php esc_html_e( 'Stay Grounded', 'anchored-peptides' ); ?></em></h1>
-        <p class="ap-hero-sub"><?php esc_html_e( 'Third-party HPLC-tested peptides for serious researchers. Purity you can trust, dispatched same-day from Canada.', 'anchored-peptides' ); ?></p>
+        <p class="ap-eyebrow"><?php echo esc_html( $copy( 'hero_eyebrow', 'Research-grade quality' ) ); ?></p>
+        <h1><?php echo esc_html( $copy( 'hero_h1', 'Peptides That' ) ); ?> <em><?php echo esc_html( $copy( 'hero_h1_em', 'Stay Grounded' ) ); ?></em></h1>
+        <p class="ap-hero-sub"><?php echo esc_html( $copy( 'hero_sub', 'Third-party HPLC-tested peptides for serious researchers. Purity you can trust, dispatched same-day from Canada.' ) ); ?></p>
         <div class="ap-hero-btns">
-            <a class="ap-btn" href="<?php echo esc_url( $shop ); ?>"><?php esc_html_e( 'Browse Catalog', 'anchored-peptides' ); ?></a>
-            <a class="ap-btn-outline" href="<?php echo esc_url( $learn ); ?>"><?php esc_html_e( 'Learn More', 'anchored-peptides' ); ?></a>
+            <a class="ap-btn" href="<?php echo esc_url( $shop ); ?>"><?php echo esc_html( $copy( 'hero_cta_primary', 'Browse Catalog' ) ); ?></a>
+            <a class="ap-btn-outline" href="<?php echo esc_url( $learn ); ?>"><?php echo esc_html( $copy( 'hero_cta_secondary', 'Learn More' ) ); ?></a>
         </div>
         <div class="ap-hero-stats">
-            <div class="ap-hero-stat"><b>99.9%</b><span><?php esc_html_e( 'Purity', 'anchored-peptides' ); ?></span></div>
-            <div class="ap-hero-stat"><b>20k+</b><span><?php esc_html_e( 'Researchers', 'anchored-peptides' ); ?></span></div>
-            <div class="ap-hero-stat"><b>24h</b><span><?php esc_html_e( 'Dispatch', 'anchored-peptides' ); ?></span></div>
+            <div class="ap-hero-stat"><b><?php echo esc_html( $copy( 'hero_stat1_num', '99.9%' ) ); ?></b><span><?php echo esc_html( $copy( 'hero_stat1_label', 'Purity' ) ); ?></span></div>
+            <div class="ap-hero-stat"><b><?php echo esc_html( $copy( 'hero_stat2_num', '20k+' ) ); ?></b><span><?php echo esc_html( $copy( 'hero_stat2_label', 'Researchers' ) ); ?></span></div>
+            <div class="ap-hero-stat"><b><?php echo esc_html( $copy( 'hero_stat3_num', '24h' ) ); ?></b><span><?php echo esc_html( $copy( 'hero_stat3_label', 'Dispatch' ) ); ?></span></div>
         </div>
     </div>
     <div class="ap-hero-media">
-        <img src="<?php echo esc_url( $hero ); ?>" alt="<?php esc_attr_e( 'Anchored Peptides research vials', 'anchored-peptides' ); ?>">
+        <img src="<?php echo esc_url( $hero ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) . ' ' . $copy( 'hero_image_alt', 'research vials' ) ); ?>">
         <span class="ap-hero-badge">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#3E412E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5Z"/><path d="m9 12 2 2 4-4"/></svg>
-            <span><b><?php esc_html_e( 'HPLC Verified', 'anchored-peptides' ); ?></b><br><small style="color:var(--ap-muted)"><?php esc_html_e( 'Batch COA available', 'anchored-peptides' ); ?></small></span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--ap-olive)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span><b><?php echo esc_html( $copy( 'hero_badge_title', 'HPLC Verified' ) ); ?></b><br><small style="color:var(--ap-muted)"><?php echo esc_html( $copy( 'hero_badge_sub', 'Batch COA available' ) ); ?></small></span>
         </span>
     </div>
 </section>
@@ -118,11 +126,11 @@ $cat_icons = array(
 <!-- ── FOUNDER STORY ── -->
 <section class="ap-band-dark">
     <div class="ap-band-inner">
-        <p class="ap-eyebrow" style="color:var(--ap-cream3)"><?php esc_html_e( 'Why we’re here', 'anchored-peptides' ); ?></p>
-        <h2 style="color:var(--ap-cream)"><?php esc_html_e( 'How We Found Peptides — and Never Looked Back', 'anchored-peptides' ); ?></h2>
-        <p><?php esc_html_e( 'Founded by a husband and wife after having two kids and entering our mid-30s, we found ourselves fighting for energy, stamina, and ways to keep up with the busyness of parenthood.', 'anchored-peptides' ); ?></p>
-        <p><?php esc_html_e( 'We came across peptides through a family friend, did our own research, and never looked back. Our mission is to share the research that helped us, so doing your own research can help you find the same changes — for the better.', 'anchored-peptides' ); ?></p>
-        <p class="ap-band-sign"><?php esc_html_e( 'Stay true, stay anchored.', 'anchored-peptides' ); ?> ⚓</p>
+        <p class="ap-eyebrow" style="color:var(--ap-cream3)"><?php echo esc_html( $copy( 'founder_eyebrow', 'Why we’re here' ) ); ?></p>
+        <h2 style="color:var(--ap-cream)"><?php echo esc_html( $copy( 'founder_h2', 'How We Found Peptides — and Never Looked Back' ) ); ?></h2>
+        <p><?php echo esc_html( $copy( 'founder_p1', 'Founded by a husband and wife after having two kids and entering our mid-30s, we found ourselves fighting for energy, stamina, and ways to keep up with the busyness of parenthood.' ) ); ?></p>
+        <p><?php echo esc_html( $copy( 'founder_p2', 'We came across peptides through a family friend, did our own research, and never looked back. Our mission is to share the research that helped us, so doing your own research can help you find the same changes — for the better.' ) ); ?></p>
+        <p class="ap-band-sign"><?php echo esc_html( $copy( 'tagline', 'Stay true, stay anchored.' ) ); ?> ⚓</p>
     </div>
 </section>
 

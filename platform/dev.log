@@ -1,0 +1,20 @@
+
+> peptide-site-platform@0.1.0 dev
+> next dev
+
+ [33m[1m⚠[22m[39m Port 3000 is in use, trying 3001 instead.
+ [33m[1m⚠[22m[39m Port 3001 is in use, trying 3002 instead.
+ [33m[1m⚠[22m[39m Port 3002 is in use, trying 3003 instead.
+ [33m[1m⚠[22m[39m Port 3003 is in use, trying 3004 instead.
+  [1m[38;2;173;127;168m▲ Next.js 14.2.35[39m[22m
+  - Local:        http://localhost:3004
+  - Environments: .env.local
+
+ [32m[1m✓[22m[39m Starting...
+ [32m[1m✓[22m[39m Ready in 1381ms
+ [32m[1m✓[22m[39m Compiled /api/ai-assist in 241ms (58 modules)
+ POST /api/ai-assist [32m200[39m in 2774ms
+ POST /api/ai-assist [32m200[39m in 1843ms
+ [37m[1m○[22m[39m Compiling /intake ...
+ [32m[1m✓[22m[39m Compiled /intake in 1289ms (465 modules)
+ GET /intake [32m200[39m in 1401ms

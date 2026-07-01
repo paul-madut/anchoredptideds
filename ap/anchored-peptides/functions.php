@@ -13,9 +13,14 @@ define( 'AP_URI', get_template_directory_uri() );
 /**
  * Shared Google Fonts URL — used by the theme AND the homepage plugin so the
  * type system is defined once. (Newsreader serif + Hanken Grotesk sans.)
+ *
+ * Per-site override: the `ap_fonts_url` option lets a generated brand swap the
+ * whole type system at deploy time; the shipped default keeps AP unchanged.
  */
 function ap_fonts_url() {
-    return 'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,600&display=swap';
+    $default = 'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,600&display=swap';
+    $url = get_option( 'ap_fonts_url', '' );
+    return ( is_string( $url ) && '' !== $url && 0 === strpos( $url, 'https://' ) ) ? $url : $default;
 }
 
 function ap_setup() {
@@ -57,6 +62,7 @@ function ap_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'ap_scripts' );
 
+require_once AP_DIR . '/inc/brand.php';
 require_once AP_DIR . '/inc/woocommerce.php';
 require_once AP_DIR . '/inc/meta-box.php';
 require_once AP_DIR . '/inc/variations-generator.php';
