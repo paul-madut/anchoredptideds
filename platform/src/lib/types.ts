@@ -35,6 +35,13 @@ export interface SiteRequest {
   deploy_result: DeployResult | null;
   deployed_url: string | null;
 
+  // Generated artifacts (populated on approve)
+  html_url: string | null;
+  html_source: string | null;
+  bundle_url: string | null;
+  config: unknown | null;
+  generated_at: string | null;
+
   submitted_at: string;
   deployed_at: string | null;
 }
@@ -52,6 +59,7 @@ export interface ProvisionConfig {
   products_csv_url: string;
   ensure_woocommerce: boolean;
   coming_soon: boolean;
+  custom_home_html?: string;
 }
 
 export interface DeployResult {

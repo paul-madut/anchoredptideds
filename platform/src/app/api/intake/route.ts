@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
       answers: body.answers ?? {},
       emphasis_categories: body.emphasis_categories ?? [],
       preset_key: body.preset_key ?? null,
+      tokens: body.tokens ?? {},
       fonts: preset?.fonts ?? {},
       copy: body.copy ?? {},
       logo_path: logoPath,

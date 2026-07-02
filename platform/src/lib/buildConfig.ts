@@ -42,5 +42,7 @@ export function buildProvisionConfig(row: SiteRequest): ProvisionConfig {
     products_csv_url: env('PRODUCTS_CSV_URL'),
     ensure_woocommerce: true,
     coming_soon: false,
+    // The reviewed/edited homepage HTML becomes the deployed front page.
+    custom_home_html: row.html_source ?? undefined,
   };
 }

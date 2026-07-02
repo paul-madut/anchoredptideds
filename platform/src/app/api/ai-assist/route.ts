@@ -58,6 +58,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, preset_key });
     }
 
+    if (step === 'palette') {
+      const out = await chatJSON(
+        system,
+        `Design a cohesive, premium color palette for this brand. Return four hex colors: ` +
+          `{"bg": string (light page background), "ink": string (near-black text), ` +
+          `"accent": string (brand/button color), "dark": string (dark section background)}. ` +
+          `Ensure strong contrast and an editorial, trustworthy feel. Brand: ${JSON.stringify(ctx)}`,
+      );
+      const hex = (v: unknown) => (typeof v === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v.trim()) ? v.trim() : '');
+      return NextResponse.json({ ok: true, palette: { bg: hex(out.bg), ink: hex(out.ink), accent: hex(out.accent), dark: hex(out.dark) } });
+    }
+
     if (step === 'copy') {
       const out = await chatJSON(
         system,

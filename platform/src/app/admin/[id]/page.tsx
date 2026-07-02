@@ -6,6 +6,8 @@ import { storagePublicUrl } from '@/lib/buildConfig';
 import type { SiteRequest } from '@/lib/types';
 import Preview from '@/components/Preview';
 import DeployButton from '@/components/DeployButton';
+import GenerateButton from '@/components/GenerateButton';
+import HtmlReview from '@/components/HtmlReview';
 import { saveTarget, setStatus } from './actions';
 
 export const dynamic = 'force-dynamic';
@@ -33,21 +35,30 @@ export default async function RequestDetail({ params }: { params: { id: string }
       {/* Left: details + deploy controls */}
       <div style={{ display: 'grid', gap: 18 }}>
         <div>
-          <h1 style={{ fontSize: 24, margin: '0 0 4px' }}>{row.business_name}</h1>
+          <h1 className="display" style={{ fontSize: 30, margin: '0 0 4px' }}>{row.business_name}</h1>
           <p className="muted" style={{ margin: 0, fontSize: 14 }}>{row.customer_name} · {row.customer_email}</p>
         </div>
 
         <div className="card" style={{ padding: 16 }}>
           <b style={{ fontSize: 14 }}>Stage</b>
-          <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 8, margin: '10px 0 14px', flexWrap: 'wrap' }}>
             <form action={async () => { 'use server'; await setStatus(row.id, 'in_review'); }}>
               <button className="btn-ghost" style={{ borderRadius: 40, padding: '8px 14px', cursor: 'pointer' }}>Mark in review</button>
             </form>
-            <form action={async () => { 'use server'; await setStatus(row.id, 'approved'); }}>
-              <button className="btn-ghost" style={{ borderRadius: 40, padding: '8px 14px', cursor: 'pointer' }}>Approve</button>
-            </form>
           </div>
+          <GenerateButton id={row.id} hasArtifacts={!!row.html_url} />
+          <p className="muted" style={{ fontSize: 12, margin: '8px 0 0' }}>Approving generates the homepage HTML — your editable source of truth. Review it below before activating.</p>
         </div>
+
+        {row.html_url && (
+          <div className="card" style={{ padding: 16 }}>
+            <b style={{ fontSize: 14 }}>Review &amp; edit HTML</b>
+            {row.generated_at && <span className="muted" style={{ fontSize: 12, marginLeft: 8 }}>{new Date(row.generated_at).toLocaleString()}</span>}
+            <div style={{ marginTop: 12 }}>
+              <HtmlReview id={row.id} htmlUrl={row.html_url} />
+            </div>
+          </div>
+        )}
 
         <div className="card" style={{ padding: 16 }}>
           <b style={{ fontSize: 14 }}>Deploy target</b>
@@ -60,8 +71,14 @@ export default async function RequestDetail({ params }: { params: { id: string }
         </div>
 
         <div className="card" style={{ padding: 16 }}>
-          <b style={{ fontSize: 14, display: 'block', marginBottom: 10 }}>Go live</b>
+          <b style={{ fontSize: 14, display: 'block', marginBottom: 4 }}>Activate site</b>
+          <p className="muted" style={{ fontSize: 12, margin: '0 0 12px' }}>Turns the reviewed HTML into the WordPress theme + plugins and deploys to the target with the customer’s login.</p>
           <DeployButton id={row.id} initialStatus={row.status} ready={ready} />
+          {row.bundle_url && (
+            <p style={{ fontSize: 12, margin: '10px 0 0' }}>
+              <a href={row.bundle_url} download>Download WordPress bundle ↓</a> <span className="muted">(the generated theme + plugins)</span>
+            </p>
+          )}
         </div>
 
         <div className="card" style={{ padding: 16 }}>
@@ -77,10 +94,14 @@ export default async function RequestDetail({ params }: { params: { id: string }
       </div>
 
       {/* Right: live preview of what will deploy */}
-      <div style={{ position: 'sticky', top: 20 }}>
-        <div className="muted" style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '.12em', marginBottom: 10 }}>Preview</div>
-        <div className="card" style={{ overflow: 'hidden', padding: 0 }}>
-          <Preview tokens={tokens} fonts={fonts} brandName={row.business_name ?? 'Brand'} logoUrl={logoUrl} heroImageUrl={heroUrl} copy={row.copy ?? {}} />
+      <div style={{ position: 'sticky', top: 88 }}>
+        <div className="eyebrow" style={{ marginBottom: 10 }}>Preview</div>
+        <div className="card" style={{ overflow: 'hidden', padding: 8 }}>
+          <div style={{ maxHeight: 640, overflow: 'auto', borderRadius: 10 }}>
+            <div style={{ transform: 'scale(0.96)', transformOrigin: 'top center' }}>
+              <Preview tokens={tokens} fonts={fonts} brandName={row.business_name ?? 'Brand'} logoUrl={logoUrl} heroImageUrl={heroUrl} copy={row.copy ?? {}} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

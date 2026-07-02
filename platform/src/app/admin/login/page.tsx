@@ -24,15 +24,18 @@ export default function AdminLogin() {
   }
 
   return (
-    <main style={{ maxWidth: 360, margin: '0 auto', padding: '96px 24px' }}>
-      <h1 style={{ fontSize: 26, marginBottom: 6 }}>Admin sign in</h1>
-      <p className="muted" style={{ fontSize: 14, marginTop: 0 }}>Site build queue.</p>
-      <form onSubmit={signIn} style={{ display: 'grid', gap: 12, marginTop: 20 }}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        {error && <p style={{ color: '#a8503b', fontSize: 13, margin: 0 }}>{error}</p>}
-        <button className="btn" disabled={busy}>{busy ? 'Signing in…' : 'Sign in'}</button>
-      </form>
+    <main style={{ minHeight: '100dvh', display: 'grid', placeItems: 'center', padding: 24 }}>
+      <div className="rise" style={{ width: '100%', maxWidth: 360 }}>
+        <p className="eyebrow">Peptide Site Studio</p>
+        <h1 className="display" style={{ fontSize: 34, margin: '10px 0 4px' }}>Admin sign in</h1>
+        <p className="muted" style={{ fontSize: 14, marginTop: 0 }}>Site build queue.</p>
+        <form onSubmit={signIn} style={{ display: 'grid', gap: 12, marginTop: 24 }}>
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
+          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          {error && <p style={{ color: '#9a3b2b', fontSize: 13, margin: 0 }}>{error}</p>}
+          <button className="btn" disabled={busy}>{busy ? 'Signing in…' : 'Sign in →'}</button>
+        </form>
+      </div>
     </main>
   );
 }

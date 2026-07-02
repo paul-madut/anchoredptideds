@@ -2,18 +2,22 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main style={{ maxWidth: 720, margin: '0 auto', padding: '96px 24px', textAlign: 'center' }}>
-      <p className="pill">Peptide Site Studio</p>
-      <h1 style={{ fontSize: 44, lineHeight: 1.1, margin: '20px 0 14px' }}>
-        Design your premium peptide storefront.
-      </h1>
-      <p className="muted" style={{ fontSize: 18, maxWidth: 520, margin: '0 auto 32px' }}>
-        Answer a few questions about your brand — name, palette, type, and feel — and preview a
-        real store built to your look. Takes about 10 minutes.
-      </p>
-      <Link href="/intake" className="btn" style={{ display: 'inline-block', textDecoration: 'none' }}>
-        Start designing →
-      </Link>
+    <main style={{ minHeight: '100dvh', display: 'grid', placeItems: 'center', padding: '24px' }}>
+      <div style={{ maxWidth: 640, textAlign: 'center' }}>
+        <p className="eyebrow rise" style={{ animationDelay: '0.05s' }}>Peptide Site Studio</p>
+        <h1 className="display rise" style={{ fontSize: 'clamp(38px, 7vw, 62px)', margin: '18px 0 18px', animationDelay: '0.12s' }}>
+          Design your premium<br />peptide storefront.
+        </h1>
+        <p className="muted rise" style={{ fontSize: 18, lineHeight: 1.6, maxWidth: 500, margin: '0 auto 34px', animationDelay: '0.2s' }}>
+          Answer a few questions about your brand — name, palette, type, and feel — and watch a real
+          store take shape. About ten minutes.
+        </p>
+        <div className="rise" style={{ animationDelay: '0.28s' }}>
+          <Link href="/intake" className="btn" style={{ display: 'inline-block', fontSize: 16, padding: '15px 30px' }}>
+            Start designing →
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }

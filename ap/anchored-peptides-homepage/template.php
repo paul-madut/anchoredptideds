@@ -9,6 +9,18 @@
  * @package AnchoredPeptides
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+/*
+ * Reviewed/edited homepage HTML (set by the generator's brand-config plugin or
+ * the provisioner). When present it IS the homepage — a complete, standalone
+ * document rendered verbatim, so admin edits to the HTML deploy exactly.
+ */
+$ap_custom_home = get_option( 'ap_custom_home_html', '' );
+if ( is_string( $ap_custom_home ) && '' !== trim( $ap_custom_home ) ) {
+	echo $ap_custom_home; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- admin-authored full-page HTML
+	exit;
+}
+
 get_header();
 
 $shop    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' );

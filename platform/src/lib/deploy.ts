@@ -1,5 +1,6 @@
 import { createSupabaseAdminClient } from './supabase/admin';
 import { buildProvisionConfig } from './buildConfig';
+import { generateBundle } from './artifacts';
 import type { SiteRequest, DeployResult, SiteStatus } from './types';
 
 const PROVISION_PATH = '/wp-json/ap-provision/v1/build';
@@ -36,6 +37,10 @@ export async function runDeploy(requestId: string): Promise<DeployResult> {
   }
 
   await setStatus('building');
+
+  // ACTIVATE also assembles the WordPress bundle from the reviewed HTML (best
+  // effort — records a downloadable artifact; deploy proceeds via options).
+  await generateBundle(requestId).catch(() => null);
 
   let config;
   try {

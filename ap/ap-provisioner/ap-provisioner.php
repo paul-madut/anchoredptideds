@@ -135,6 +135,10 @@ function ap_prov_build( WP_REST_Request $req ) {
 			update_option( 'ap_copy_' . $k, wp_kses_post( (string) $v ) );
 		}
 	}
+	// Reviewed/edited homepage HTML becomes the front page verbatim.
+	if ( isset( $cfg['custom_home_html'] ) && is_string( $cfg['custom_home_html'] ) && '' !== trim( $cfg['custom_home_html'] ) ) {
+		update_option( 'ap_custom_home_html', $cfg['custom_home_html'] );
+	}
 
 	// 4) Sideload logo + hero image → shared options.
 	if ( ! empty( $cfg['logo_url'] ) ) {

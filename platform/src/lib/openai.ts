@@ -36,6 +36,27 @@ export async function chatJSON(system: string, user: string): Promise<Record<str
   return JSON.parse(content);
 }
 
+/** Plain chat completion returning the raw text content. */
+export async function chatText(system: string, user: string): Promise<string> {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: TEXT_MODEL(),
+      temperature: 0.4,
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: user },
+      ],
+    }),
+  });
+  if (!res.ok) throw new Error(`OpenAI text HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const json = await res.json();
+  const content = json?.choices?.[0]?.message?.content;
+  if (!content) throw new Error('OpenAI returned no content');
+  return content;
+}
+
 /** Generate a single image and return raw PNG bytes. */
 export async function generateImageBytes(prompt: string): Promise<Uint8Array> {
   const res = await fetch('https://api.openai.com/v1/images/generations', {
