@@ -157,6 +157,63 @@ const NEUTRALIZE = [
 ];
 for (const [from, to] of NEUTRALIZE) h = h.split(from).join(to);
 
+// 9) Wrap removable sections in comment markers so the renderer can strip them
+// per-brand (e.g. hide the goal-category grid for strictly research-framed sites).
+function wrapSection(containedText, name) {
+  const at = h.indexOf(containedText);
+  if (at < 0) { console.error(`wrapSection: "${containedText}" not found`); return; }
+  const open = h.lastIndexOf('<section', at);
+  if (open < 0) { console.error(`wrapSection: no <section before "${containedText}"`); return; }
+  // find the matching </section>, accounting for nesting
+  let depth = 0, i = open;
+  const re = /<section\b|<\/section>/g;
+  re.lastIndex = open;
+  let end = -1, m;
+  while ((m = re.exec(h))) {
+    depth += m[0] === '</section>' ? -1 : 1;
+    if (depth === 0) { end = m.index + '</section>'.length; break; }
+  }
+  if (end < 0) { console.error(`wrapSection: unbalanced sections for "${containedText}"`); return; }
+  h = h.slice(0, open) + `<!--AP:${name}-->` + h.slice(open, end) + `<!--/AP:${name}-->` + h.slice(end);
+}
+wrapSection('Find your research category', 'CATEGORIES');
+
+// 10) Bento "selling points" section — three tiles (one tall, two stacked), each an
+// AI-designed image with the brand's selling point overlaid. Not part of the original
+// design; injected before the founder story. The renderer strips it when a brand has
+// no selling points.
+const bentoTile = (n, tall) => `
+      <div style="position: relative; border-radius: 18px; overflow: hidden; background: var(--ap-dark); min-height: ${tall ? '100%' : '0'};">
+        <img src="__SPIMG${n}__" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,20,14,0) 30%, rgba(20,20,14,0.78) 100%);"></div>
+        <div style="position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; padding: clamp(18px, 2.4vw, 30px); min-height: ${tall ? '380px' : '220px'};">
+          <div style="width: 26px; height: 2px; background: var(--ap-gold); margin-bottom: 12px;"></div>
+          <div style="font: 500 clamp(17px, 1.9vw, 24px) / 1.25 var(--ap-serif); color: var(--ap-cream); letter-spacing: 0.1px;">__SP${n}__</div>
+        </div>
+      </div>`;
+const bento = `<!--AP:BENTO--><section style="background: var(--ap-bg2); border-top: 1px solid var(--ap-border); padding: clamp(48px, 7vw, 84px) 0;">
+    <div style="max-width: 1280px; margin: 0px auto; padding: 0px clamp(16px, 4vw, 40px);">
+      <div style="text-align: center; margin-bottom: clamp(26px, 4vw, 44px);">
+        <div style="font: 600 11px var(--ap-sans); letter-spacing: 3px; color: var(--ap-muted); text-transform: uppercase; margin-bottom: 12px;">The Difference</div>
+        <h2 style="font: 500 clamp(28px, 4vw, 44px) / 1.1 var(--ap-serif); color: var(--ap-ink); margin: 0px;">Why researchers choose __BRAND__</h2>
+      </div>
+      <div class="ap-bento" style="display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(12px, 1.6vw, 20px);">
+        ${bentoTile(1, true)}
+        <div style="display: grid; gap: clamp(12px, 1.6vw, 20px);">
+          ${bentoTile(2, false)}
+          ${bentoTile(3, false)}
+        </div>
+      </div>
+    </div>
+    <style>@media (max-width: 760px) { .ap-bento { grid-template-columns: 1fr !important; } }</style>
+  </section><!--/AP:BENTO-->`;
+{
+  const storyAt = h.indexOf('__STORY_H1__');
+  const storyOpen = storyAt >= 0 ? h.lastIndexOf('<section', storyAt) : -1;
+  if (storyOpen < 0) console.error('bento: story section not found');
+  else h = h.slice(0, storyOpen) + bento + '\n  ' + h.slice(storyOpen);
+}
+
 fs.writeFileSync(OUT, h);
 console.error(`base template → ${OUT} (${(h.length / 1024).toFixed(0)} KB)`);
 const leftover = (h.match(/rgb\(\d+, \d+, \d+\)/g) || []);

@@ -42,6 +42,8 @@ export async function POST(req: NextRequest) {
       positioning: body.positioning ?? null,
       answers: body.answers ?? {},
       emphasis_categories: body.emphasis_categories ?? [],
+      show_categories: body.show_categories !== false,
+      selling_points: sanitizePoints(body.selling_points),
       preset_key: body.preset_key ?? null,
       tokens: body.tokens ?? {},
       fonts: preset?.fonts ?? {},
@@ -54,6 +56,16 @@ export async function POST(req: NextRequest) {
 
   if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, id: data.id });
+}
+
+/** Up to three non-empty selling points, length-capped. */
+function sanitizePoints(v: unknown): string[] {
+  if (!Array.isArray(v)) return [];
+  return v
+    .filter((p): p is string => typeof p === 'string')
+    .map((p) => p.trim().slice(0, 180))
+    .filter(Boolean)
+    .slice(0, 3);
 }
 
 function extFromMime(mime: string): string {

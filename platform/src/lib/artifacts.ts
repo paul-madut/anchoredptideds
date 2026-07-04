@@ -6,6 +6,7 @@ import { PRESET_BY_KEY } from './presets';
 import { storagePublicUrl } from './buildConfig';
 import { type SiteConfig } from './renderSite';
 import { renderHomeHtml } from './renderHome';
+import { hasOpenAI, generateImageBytes } from './openai';
 import { generateBrandConfigPlugin } from './brandConfigPlugin';
 import type { SiteRequest } from './types';
 
@@ -25,6 +26,8 @@ export function siteConfigFor(row: SiteRequest): SiteConfig {
     logoUrl: storagePublicUrl('logos', row.logo_path),
     heroImageUrl: storagePublicUrl('hero-images', row.hero_image_path),
     copy: row.copy ?? {},
+    showCategories: row.show_categories !== false,
+    sellingPoints: Array.isArray(row.selling_points) ? row.selling_points : [],
   };
 }
 
@@ -46,6 +49,37 @@ async function storeHtml(id: string, html: string): Promise<string> {
 }
 
 /**
+ * Generate the three bento tile images from the brand's selling points
+ * ("the designer" = gpt-image-1). Best-effort: a failed tile falls back to
+ * the renderer's decorative art rather than failing the approve.
+ */
+async function generateSellingPointImages(row: SiteRequest, cfg: SiteConfig): Promise<(string | undefined)[]> {
+  const points = (cfg.sellingPoints ?? []).map((p) => p.trim()).filter(Boolean).slice(0, 3);
+  if (points.length < 3 || !hasOpenAI()) return [];
+  const db = createSupabaseAdminClient();
+  const accent = cfg.tokens['--ap-olive'] ?? '#3E412E';
+  const bg = cfg.tokens['--ap-bg'] ?? '#ECE7DA';
+  return Promise.all(
+    points.map(async (point, i) => {
+      try {
+        const prompt =
+          `Premium editorial still-life photograph for a research-peptide brand, illustrating: "${point}". ` +
+          `Laboratory glass vials, scientific equipment, or abstract macro detail — tasteful and clinical. ` +
+          `Muted palette anchored on ${accent} and ${bg}, soft studio light, shallow depth of field. ` +
+          `Strictly no people, no faces, no hands, no text, no logos.`;
+        const bytes = await generateImageBytes(prompt);
+        const path = `${row.id}/selling-point-${i + 1}.png`;
+        const up = await db.storage.from(ARTIFACTS_BUCKET).upload(path, bytes, { contentType: 'image/png', upsert: true, cacheControl: '0' });
+        if (up.error) return undefined;
+        return db.storage.from(ARTIFACTS_BUCKET).getPublicUrl(path).data.publicUrl;
+      } catch {
+        return undefined;
+      }
+    }),
+  );
+}
+
+/**
  * APPROVE step — render the HTML from the request's design and store it as the
  * editable source of truth (`html_source`). No WordPress bundle yet.
  */
@@ -54,6 +88,7 @@ export async function generateHtml(requestId: string): Promise<{ ok: boolean; ht
     const db = createSupabaseAdminClient();
     const row = await loadRow(requestId);
     const cfg = siteConfigFor(row);
+    cfg.sellingPointImages = await generateSellingPointImages(row, cfg);
     const html = renderHomeHtml(cfg);
     const html_url = await storeHtml(row.id, html);
     await db.from('site_requests').update({

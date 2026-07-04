@@ -11,32 +11,32 @@
   - Environments: .env.local
 
  ✓ Starting...
- ✓ Ready in 1369ms
- ✓ Compiled /api/gentest5 in 472ms (181 modules)
+ ✓ Ready in 1035ms
+ ✓ Compiled /api/intake in 356ms (100 modules)
 ⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- POST /api/gentest5 200 in 2883ms
- ✓ Compiled in 4ms
- ✓ Compiled in 558ms (203 modules)
- ○ Compiling / ...
- ✓ Compiled / in 1496ms (497 modules)
- GET / 200 in 1617ms
- ○ Compiling /intake ...
- ✓ Compiled /intake in 1092ms (1305 modules)
- GET /intake 200 in 1205ms
- ✓ Compiled /src/middleware in 220ms (128 modules)
- ✓ Compiled /admin/login in 377ms (1429 modules)
+ POST /api/intake 200 in 1639ms
+ ✓ Compiled /api/gentest6 in 267ms (184 modules)
 ⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /admin/login 200 in 519ms
+ POST /api/gentest6 200 in 50580ms
+ ✓ Compiled /api/ai-assist in 70ms (58 modules)
+ POST /api/ai-assist 200 in 1844ms
+ ✓ Compiled /src/middleware in 325ms (128 modules)
+ ○ Compiling /admin/login ...
+ ✓ Compiled /admin/login in 1412ms (657 modules)
+⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
+ GET /admin/login 200 in 1529ms
 <w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (106kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
 <w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (250kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
- ○ Compiling /admin ...
- ✓ Compiled /admin in 659ms (1028 modules)
+ ✓ Compiled /admin in 202ms (715 modules)
 ⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- ✓ Compiled /admin/[id] in 279ms (1075 modules)
+ GET /admin?q=meridian 200 in 637ms
+ ○ Compiling /intake ...
+ ✓ Compiled /intake in 1163ms (1530 modules)
+ GET /intake 200 in 1274ms
+ ✓ Compiled /_not-found in 148ms (1533 modules)
+ GET /_next/static/chunks/app/intake/LayoutGroupContext.mjs.map 404 in 216ms
+ ✓ Compiled / in 440ms (1634 modules)
+ GET / 200 in 533ms
+ GET /intake 200 in 50ms
 ⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- ✓ Compiled /api/preview/[id] in 77ms (386 modules)
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /api/preview/65547626-48b5-4029-9b15-16e227dadc61?v=0 200 in 576ms
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /api/preview/65547626-48b5-4029-9b15-16e227dadc61?v=0 200 in 874ms
+ GET /admin/login 200 in 47ms

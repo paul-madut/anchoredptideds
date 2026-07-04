@@ -30,6 +30,7 @@ const STEPS = [
   { key: 'theme', title: 'Theme', ai: 'theme', aiLabel: 'Pick for me', aiDesc: 'AI selects the theme that best fits your brand.' },
   { key: 'colors', title: 'Colors', ai: 'palette', aiLabel: 'Design a palette', aiDesc: 'AI generates a bespoke color palette.' },
   { key: 'copy', title: 'Copy', ai: 'copy', aiLabel: 'Write it for me', aiDesc: 'AI writes your homepage headline and hero copy.' },
+  { key: 'selling', title: 'Selling points', ai: 'selling', aiLabel: 'Write them for me', aiDesc: 'AI writes three selling points from your brand.' },
   { key: 'logo', title: 'Logo', ai: null as string | null, aiLabel: '', aiDesc: '' },
   { key: 'hero', title: 'Hero image', ai: 'hero', aiLabel: 'Generate for me', aiDesc: 'AI creates hero artwork tuned to your theme.' },
   { key: 'finish', title: 'Finish', ai: null as string | null, aiLabel: '', aiDesc: '' },
@@ -41,6 +42,8 @@ export default function IntakeFlow({ presets }: { presets: Preset[] }) {
   const [businessName, setBusinessName] = useState('');
   const [positioning, setPositioning] = useState('');
   const [emphasis, setEmphasis] = useState<string[]>([]);
+  const [showCategories, setShowCategories] = useState(true);
+  const [sellingPoints, setSellingPoints] = useState<string[]>(['', '', '']);
   const [presetKey, setPresetKey] = useState(presets[0]?.key ?? '');
   const [overrides, setOverrides] = useState<Record<string, string>>({});
   const [advanced, setAdvanced] = useState(false);
@@ -99,6 +102,7 @@ export default function IntakeFlow({ presets }: { presets: Preset[] }) {
       else if (kind === 'theme') { if (json.preset_key) pickPreset(json.preset_key); }
       else if (kind === 'palette') { if (json.palette) setOverrides((o) => ({ ...o, ...deriveFromPrimary(json.palette) })); }
       else if (kind === 'copy') { if (json.copy) setCopy((c) => ({ ...c, ...json.copy })); }
+      else if (kind === 'selling') { if (Array.isArray(json.selling_points)) setSellingPoints([0, 1, 2].map((i) => json.selling_points[i] ?? '')); }
     } catch (e) { setAiNote((e as Error).message); } finally { setAiBusy(null); }
   }
 
@@ -107,6 +111,7 @@ export default function IntakeFlow({ presets }: { presets: Preset[] }) {
     try {
       const res = await fetch('/api/intake', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
         business_name: businessName, positioning, emphasis_categories: emphasis,
+        show_categories: showCategories, selling_points: sellingPoints.map((p) => p.trim()).filter(Boolean),
         preset_key: presetKey, tokens: overrides, copy,
         logo_data_url: logo?.dataUrl, logo_name: logo?.name, hero_image_path: heroSel?.path ?? null,
         customer_name: customerName, customer_email: customerEmail,
@@ -183,6 +188,13 @@ export default function IntakeFlow({ presets }: { presets: Preset[] }) {
                       </motion.button>
                     ))}
                   </div>
+                  <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginTop: 20, padding: 14, border: '1px solid var(--line-strong)', borderRadius: 12, background: 'var(--card)', cursor: 'pointer' }}>
+                    <input type="checkbox" checked={!showCategories} onChange={(e) => setShowCategories(!e.target.checked)} style={{ width: 16, height: 16, marginTop: 2, accentColor: 'var(--ink)', cursor: 'pointer' }} />
+                    <span style={{ fontSize: 13.5, lineHeight: 1.5 }}>
+                      <b style={{ display: 'block', fontSize: 14 }}>Hide goal categories on the website</b>
+                      <span className="muted">Removes the goal-based category section so nothing suggests these products are for human use — the site stays strictly research-framed.</span>
+                    </span>
+                  </label>
                 </Step>
               )}
 
@@ -255,12 +267,28 @@ export default function IntakeFlow({ presets }: { presets: Preset[] }) {
 
               {step === 5 && (
                 <Step>
+                  <StepHead title="Three reasons to buy from you" sub="Your selling points — quality, testing, sourcing, service. Our designer creates custom artwork for each, shown as a feature grid on your homepage." meta={meta} aiBusy={aiBusy} runAssist={runAssist} />
+                  <div style={{ display: 'grid', gap: 12 }}>
+                    {sellingPoints.map((p, i) => (
+                      <Small key={i} label={`Selling point ${i + 1}`}>
+                        <textarea rows={2} value={p} maxLength={180}
+                          placeholder={['e.g. Every batch independently HPLC-tested with published COAs', 'e.g. Same-day dispatch with temperature-safe packaging', 'e.g. Responsive support from people who know the catalog'][i]}
+                          onChange={(e) => setSellingPoints((sp) => sp.map((x, j) => (j === i ? e.target.value : x)))} />
+                      </Small>
+                    ))}
+                  </div>
+                  <p className="muted" style={{ fontSize: 12.5, marginTop: 4 }}>Fill all three to get the designed feature grid — or leave them blank to skip it.</p>
+                </Step>
+              )}
+
+              {step === 6 && (
+                <Step>
                   <StepHead title="Add your logo" sub="Optional — skip it and we’ll use a clean wordmark." meta={meta} aiBusy={aiBusy} runAssist={runAssist} />
                   <LogoUpload logo={logo} setLogo={setLogo} />
                 </Step>
               )}
 
-              {step === 6 && (
+              {step === 7 && (
                 <Step>
                   <StepHead title="Generate a hero image" sub="AI artwork tuned to your palette. Pick your favorite." meta={meta} aiBusy={aiBusy} runAssist={runAssist} />
                   <button className="btn" onClick={() => generateHero()} disabled={genState === 'loading'}>
@@ -279,7 +307,7 @@ export default function IntakeFlow({ presets }: { presets: Preset[] }) {
                 </Step>
               )}
 
-              {step === 7 && (
+              {step === 8 && (
                 <Step>
                   <StepHead title="Where should we send it?" sub="We’ll email your preview site when it’s ready." meta={meta} aiBusy={aiBusy} runAssist={runAssist} />
                   <div style={{ display: 'grid', gap: 12 }}>

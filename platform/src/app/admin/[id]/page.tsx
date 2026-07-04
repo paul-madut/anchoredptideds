@@ -87,6 +87,8 @@ export default async function RequestDetail({ params }: { params: { id: string }
             <dt className="muted">Positioning</dt><dd style={{ margin: 0 }}>{row.positioning || '—'}</dd>
             <dt className="muted">Theme</dt><dd style={{ margin: 0 }}>{preset?.label ?? row.preset_key ?? '—'}</dd>
             <dt className="muted">Focus</dt><dd style={{ margin: 0 }}>{(row.emphasis_categories ?? []).join(', ') || '—'}</dd>
+            <dt className="muted">Categories</dt><dd style={{ margin: 0 }}>{row.show_categories === false ? 'hidden on site (research-only framing)' : 'shown on site'}</dd>
+            <dt className="muted">Selling points</dt><dd style={{ margin: 0 }}>{(row.selling_points ?? []).length ? (row.selling_points ?? []).map((p, i) => <span key={i} style={{ display: 'block' }}>{i + 1}. {p}</span>) : '—'}</dd>
             <dt className="muted">Logo</dt><dd style={{ margin: 0 }}>{logoUrl ? 'uploaded' : 'wordmark fallback'}</dd>
             <dt className="muted">Hero</dt><dd style={{ margin: 0 }}>{heroUrl ? 'selected' : 'default'}</dd>
           </dl>

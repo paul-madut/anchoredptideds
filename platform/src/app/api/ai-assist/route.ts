@@ -92,6 +92,21 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    if (step === 'selling') {
+      const out = await chatJSON(
+        system,
+        `Write exactly three distinct selling points for this brand's products. Each is one punchy sentence ` +
+          `(6-12 words) about quality, testing, sourcing, or service — research-use framing, no health claims, ` +
+          `no medical benefits. Return {"selling_points": [string, string, string]}. Brand: ${JSON.stringify(ctx)}`,
+      );
+      const selling_points = (Array.isArray(out.selling_points) ? out.selling_points : [])
+        .filter((s: unknown): s is string => typeof s === 'string' && !!s.trim())
+        .map((s: string) => s.trim())
+        .slice(0, 3);
+      if (selling_points.length < 3) return NextResponse.json({ ok: false, error: 'AI returned too few points — try again.' }, { status: 502 });
+      return NextResponse.json({ ok: true, selling_points });
+    }
+
     return NextResponse.json({ ok: false, error: `Unknown step: ${step}` }, { status: 400 });
   } catch (e) {
     return NextResponse.json({ ok: false, error: (e as Error).message }, { status: 502 });

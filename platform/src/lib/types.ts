@@ -21,6 +21,8 @@ export interface SiteRequest {
   positioning: string | null;
   answers: Record<string, unknown>;
   emphasis_categories: string[];
+  show_categories: boolean;
+  selling_points: string[];
 
   preset_key: string | null;
   tokens: Tokens;

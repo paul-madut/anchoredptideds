@@ -59,9 +59,40 @@ function fontsLink(url?: string): string {
   );
 }
 
+/** Remove a marker-wrapped block: <!--AP:NAME--> … <!--/AP:NAME--> */
+function stripSection(h: string, name: string): string {
+  const open = h.indexOf(`<!--AP:${name}-->`);
+  const close = h.indexOf(`<!--/AP:${name}-->`);
+  if (open < 0 || close < 0) return h;
+  return h.slice(0, open) + h.slice(close + `<!--/AP:${name}-->`.length);
+}
+
+/** Decorative fallback tile art when a selling-point image wasn't generated. */
+function bentoFallback(n: number): string {
+  const shift = [0, 40, 80][n - 1] ?? 0;
+  return (
+    'data:image/svg+xml;utf8,' +
+    encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a4c3c"/><stop offset="1" stop-color="#2c2e22"/></linearGradient></defs><rect width="800" height="800" fill="url(#g)"/><circle cx="${560 - shift}" cy="${230 + shift}" r="170" fill="#ffffff" opacity="0.05"/><circle cx="${240 + shift}" cy="${580 - shift}" r="230" fill="#ffffff" opacity="0.04"/></svg>`,
+    )
+  );
+}
+
 /** Render the full standalone homepage HTML for a brand. */
 export function renderHomeHtml(cfg: SiteConfig): string {
   let h = template();
+
+  if (cfg.showCategories === false) h = stripSection(h, 'CATEGORIES');
+
+  const points = (cfg.sellingPoints ?? []).map((p) => p.trim()).filter(Boolean).slice(0, 3);
+  if (points.length < 3) {
+    h = stripSection(h, 'BENTO');
+  } else {
+    points.forEach((p, i) => {
+      h = h.split(`__SP${i + 1}__`).join(esc(p));
+      h = h.split(`__SPIMG${i + 1}__`).join(safeUrl(cfg.sellingPointImages?.[i]) || bentoFallback(i + 1));
+    });
+  }
 
   const subs: Array<[string, string]> = [
     ['__LOGO__', logoMarkup(cfg.brandName, cfg.logoUrl)],

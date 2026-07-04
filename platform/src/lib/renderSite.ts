@@ -15,6 +15,12 @@ export interface SiteConfig {
   logoUrl?: string;
   heroImageUrl?: string;
   copy: Record<string, string>;
+  /** false hides the goal-category grid (strict research framing). */
+  showCategories?: boolean;
+  /** Up to three selling points, shown as a bento grid with generated art. */
+  sellingPoints?: string[];
+  /** Image URLs paired 1:1 with sellingPoints (generated at approve time; gaps use fallback art). */
+  sellingPointImages?: (string | undefined)[];
 }
 
 const esc = (s: unknown): string =>

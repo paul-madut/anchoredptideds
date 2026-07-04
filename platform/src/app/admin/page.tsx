@@ -7,27 +7,40 @@ import { STATUS_META } from '@/components/statusMeta';
 
 export const dynamic = 'force-dynamic';
 
-export default async function AdminQueue() {
+export default async function AdminQueue({ searchParams }: { searchParams: { q?: string } }) {
   const admin = await getAdmin();
   if (!admin) redirect('/admin/login');
 
+  const q = (searchParams.q ?? '').trim();
   const db = createSupabaseAdminClient();
-  const { data } = await db
+  let query = db
     .from('site_requests')
     .select('id, created_at, status, business_name, customer_email, preset_key, deployed_url')
     .order('created_at', { ascending: false });
+  if (q) {
+    const like = `%${q.replace(/[%_,]/g, '')}%`;
+    query = query.or(`business_name.ilike.${like},customer_email.ilike.${like},customer_name.ilike.${like}`);
+  }
+  const { data } = await query;
 
   const rows = (data ?? []) as Partial<SiteRequest>[];
 
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 22 }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 16 }}>
         <h1 className="display" style={{ fontSize: 32, margin: 0 }}>Requests</h1>
-        <span className="muted" style={{ fontSize: 14 }}>{rows.length} total</span>
+        <span className="muted" style={{ fontSize: 14 }}>{rows.length}{q ? ` match${rows.length === 1 ? '' : 'es'}` : ' total'}</span>
       </div>
+      <form method="GET" style={{ display: 'flex', gap: 8, marginBottom: 22, maxWidth: 460 }}>
+        <input name="q" defaultValue={q} placeholder="Search by brand, email, or customer name…" aria-label="Search requests" style={{ flex: 1 }} />
+        <button className="btn-ghost" style={{ padding: '10px 18px', cursor: 'pointer' }}>Search</button>
+        {q && <a className="btn-ghost" href="/admin" style={{ padding: '10px 14px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>Clear</a>}
+      </form>
       {rows.length === 0 && (
         <div className="card" style={{ padding: 48, textAlign: 'center' }}>
-          <p className="muted" style={{ margin: 0 }}>No submissions yet. They’ll appear here as customers finish the intake.</p>
+          <p className="muted" style={{ margin: 0 }}>
+            {q ? <>No requests match “{q}”.</> : 'No submissions yet. They’ll appear here as customers finish the intake.'}
+          </p>
         </div>
       )}
       <div style={{ display: 'grid', gap: 12 }}>

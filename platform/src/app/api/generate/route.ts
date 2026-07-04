@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAdmin } from '@/lib/auth';
 import { generateHtml } from '@/lib/artifacts';
 
-export const maxDuration = 60;
+// Approve may generate three selling-point images (parallel, but slow models).
+export const maxDuration = 180;
 
 /**
  * POST /api/generate  { requestId }  — the APPROVE step.
