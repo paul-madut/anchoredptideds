@@ -10,23 +10,27 @@ import { useRouter } from 'next/navigation';
  *  - or download / hand-edit / re-upload the .html file
  * The HTML is the source of truth the WordPress site is built from.
  */
-export default function HtmlReview({ id, htmlUrl }: { id: string; htmlUrl: string }) {
+export default function HtmlReview({ id }: { id: string }) {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [bust, setBust] = useState(0);
   const [prompt, setPrompt] = useState('');
   const [busy, setBusy] = useState<'ai' | 'upload' | null>(null);
   const [error, setError] = useState('');
+  const [note, setNote] = useState('');
 
-  const src = `${htmlUrl}${htmlUrl.includes('?') ? '&' : '?'}v=${bust}`;
+  // Served by our own app (Supabase Storage returns HTML as text/plain, which
+  // browsers render as source). ?v= busts the iframe after each edit.
+  const src = `/api/preview/${id}?v=${bust}`;
 
   async function applyAi() {
     if (!prompt.trim()) return;
-    setBusy('ai'); setError('');
+    setBusy('ai'); setError(''); setNote('');
     try {
       const res = await fetch('/api/edit-html', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ requestId: id, prompt }) });
       const json = await res.json();
       if (!json.ok) { setError(json.error ?? 'Edit failed'); return; }
+      setNote([json.note, json.warning].filter(Boolean).join(' — ') || 'Change applied.');
       setPrompt(''); setBust((b) => b + 1); router.refresh();
     } catch (e) { setError((e as Error).message); } finally { setBusy(null); }
   }
@@ -34,9 +38,9 @@ export default function HtmlReview({ id, htmlUrl }: { id: string; htmlUrl: strin
   async function downloadHtml() {
     setError('');
     try {
-      // `download` is ignored for cross-origin URLs, so fetch → blob → save.
       const res = await fetch(src, { cache: 'no-store' });
-      const blob = await res.blob();
+      if (!res.ok) { setError('Could not fetch the HTML.'); return; }
+      const blob = new Blob([await res.text()], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -84,6 +88,7 @@ export default function HtmlReview({ id, htmlUrl }: { id: string; htmlUrl: strin
           </button>
         </div>
       </div>
+      {note && <p style={{ color: 'var(--muted)', fontSize: 13, margin: 0 }}>✦ {note}</p>}
       {error && <p style={{ color: '#9a3b2b', fontSize: 13, margin: 0 }}>{error}</p>}
     </div>
   );

@@ -55,7 +55,7 @@ export default async function RequestDetail({ params }: { params: { id: string }
             <b style={{ fontSize: 14 }}>Review &amp; edit HTML</b>
             {row.generated_at && <span className="muted" style={{ fontSize: 12, marginLeft: 8 }}>{new Date(row.generated_at).toLocaleString()}</span>}
             <div style={{ marginTop: 12 }}>
-              <HtmlReview id={row.id} htmlUrl={row.html_url} />
+              <HtmlReview id={row.id} />
             </div>
           </div>
         )}

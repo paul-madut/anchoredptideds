@@ -12,7 +12,7 @@ const TEXT_MODEL = () => process.env.OPENAI_TEXT_MODEL || 'gpt-4o-mini';
 const IMAGE_MODEL = () => process.env.OPENAI_IMAGE_MODEL || 'gpt-image-1';
 
 /** Chat completion constrained to a JSON object. Returns the parsed object. */
-export async function chatJSON(system: string, user: string): Promise<Record<string, unknown>> {
+export async function chatJSON(system: string, user: string, opts?: { temperature?: number }): Promise<Record<string, unknown>> {
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -21,7 +21,7 @@ export async function chatJSON(system: string, user: string): Promise<Record<str
     },
     body: JSON.stringify({
       model: TEXT_MODEL(),
-      temperature: 0.9,
+      temperature: opts?.temperature ?? 0.9,
       response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: system },

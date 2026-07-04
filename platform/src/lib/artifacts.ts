@@ -4,7 +4,8 @@ import JSZip from 'jszip';
 import { createSupabaseAdminClient } from './supabase/admin';
 import { PRESET_BY_KEY } from './presets';
 import { storagePublicUrl } from './buildConfig';
-import { renderSiteHtml, type SiteConfig } from './renderSite';
+import { type SiteConfig } from './renderSite';
+import { renderHomeHtml } from './renderHome';
 import { generateBrandConfigPlugin } from './brandConfigPlugin';
 import type { SiteRequest } from './types';
 
@@ -38,7 +39,8 @@ async function loadRow(requestId: string): Promise<SiteRequest> {
 async function storeHtml(id: string, html: string): Promise<string> {
   const db = createSupabaseAdminClient();
   const p = `${id}/index.html`;
-  const up = await db.storage.from(ARTIFACTS_BUCKET).upload(p, Buffer.from(html), { contentType: 'text/html; charset=utf-8', upsert: true });
+  // cacheControl 0: the file is upserted in place on every edit, so the CDN must not serve stale copies.
+  const up = await db.storage.from(ARTIFACTS_BUCKET).upload(p, Buffer.from(html), { contentType: 'text/html; charset=utf-8', upsert: true, cacheControl: '0' });
   if (up.error) throw new Error(`HTML upload: ${up.error.message}`);
   return db.storage.from(ARTIFACTS_BUCKET).getPublicUrl(p).data.publicUrl;
 }
@@ -52,7 +54,7 @@ export async function generateHtml(requestId: string): Promise<{ ok: boolean; ht
     const db = createSupabaseAdminClient();
     const row = await loadRow(requestId);
     const cfg = siteConfigFor(row);
-    const html = renderSiteHtml(cfg);
+    const html = renderHomeHtml(cfg);
     const html_url = await storeHtml(row.id, html);
     await db.from('site_requests').update({
       status: 'approved', html_source: html, html_url, config: cfg, generated_at: new Date().toISOString(),
@@ -86,7 +88,7 @@ export async function generateBundle(requestId: string): Promise<{ ok: boolean; 
   try {
     const row = await loadRow(requestId);
     const cfg = siteConfigFor(row);
-    const html = row.html_source ?? renderSiteHtml(cfg);
+    const html = row.html_source ?? renderHomeHtml(cfg);
     const logo = await fetchAsset(cfg.logoUrl);
     const hero = await fetchAsset(cfg.heroImageUrl);
 
@@ -116,7 +118,7 @@ export async function generateBundle(requestId: string): Promise<{ ok: boolean; 
 
     const bundleBytes = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
     const bundlePath = `${row.id}/${slug}-site.zip`;
-    const up = await db.storage.from(ARTIFACTS_BUCKET).upload(bundlePath, bundleBytes, { contentType: 'application/zip', upsert: true });
+    const up = await db.storage.from(ARTIFACTS_BUCKET).upload(bundlePath, bundleBytes, { contentType: 'application/zip', upsert: true, cacheControl: '0' });
     if (up.error) return { ok: false, error: `Bundle upload: ${up.error.message}` };
 
     const bundle_url = db.storage.from(ARTIFACTS_BUCKET).getPublicUrl(bundlePath).data.publicUrl;

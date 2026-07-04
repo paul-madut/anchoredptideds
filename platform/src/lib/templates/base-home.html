@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title>
+<style>
+    .sc-placeholder{background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:rgba(0,0,0,.7);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:rgba(0,0,0,.5);background:rgba(0,0,0,.05);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<style>x-dc{display:none!important}</style>
+<style></style>
+<style>/* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+</style>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: var(--ap-sans); background: #ECE7DA; color: #2C2E22; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  ::selection { background: #474A35; color: #F4F0E6; }
+  @keyframes ap-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes ap-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes ap-pulse { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+  input, button, select, textarea { font-family: inherit; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #cfc8b6; border-radius: 6px; }
+</style>
+
+</head>
+<body>
+<div id="dc-root"><div class="sc-host" data-sc-name="decoded-with-runtime"><div style="min-height: 100vh; background: var(--ap-bg); overflow-x: hidden;">
+
+  
+  <div style="background: var(--ap-dark); color: var(--ap-cream2); overflow: hidden; white-space: nowrap; border-bottom: 1px solid var(--ap-ink);">
+    <div style="display: inline-flex; align-items: center; gap: 0px; animation: 38s linear 0s infinite normal none running ap-marquee; will-change: transform;">
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Third-Party HPLC Tested</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Free Shipping Over $300</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Same-Day Dispatch Before 2 PM</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Trusted by 20,000+ Researchers</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">For Research Use Only</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Fast Dispatch</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Third-Party HPLC Tested</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Free Shipping Over $300</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Same-Day Dispatch Before 2 PM</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Trusted by 20,000+ Researchers</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">For Research Use Only</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+        <span style="display: inline-flex; align-items: center; font: 600 11px / 1 var(--ap-sans); letter-spacing: 1.4px; padding: 9px 26px; text-transform: uppercase;"><span class="sc-interp">Fast Dispatch</span><span style="margin-left: 26px; opacity: 0.4;">◆</span></span>
+      
+    </div>
+  </div>
+
+  
+  <header style="position: sticky; top: 0px; z-index: 60; background: rgba(236, 231, 218, 0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--ap-border);">
+    <div style="max-width: 1280px; margin: 0px auto; padding: 0px clamp(16px, 4vw, 40px); height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+
+      
+      
+
+      
+      __LOGO__
+
+      
+      
+        <nav style="display: flex; align-items: center; gap: 30px;">
+          <a style="font: 500 14px var(--ap-sans); color: var(--ap-ink); cursor: pointer; letter-spacing: 0.2px;" href="/shop/">Shop</a>
+          <a style="font: 500 14px var(--ap-sans); color: var(--ap-ink); cursor: pointer; letter-spacing: 0.2px;" href="/learn/">Learn</a>
+          <a style="font: 500 14px var(--ap-sans); color: var(--ap-ink); cursor: pointer; letter-spacing: 0.2px;" href="/coa-library/">COAs &amp; Testing</a>
+          <a style="font: 500 14px var(--ap-sans); color: var(--ap-ink); cursor: pointer; letter-spacing: 0.2px;" href="/learn/">Help &amp; Support</a>
+        </nav>
+      
+
+      
+      <div style="display: flex; align-items: center; gap: clamp(10px, 2vw, 20px);">
+        <span style="font-size: 18px; color: var(--ap-ink); cursor: pointer;" onclick="location.href='/shop/'">⚲</span>
+        <span style="font-size: 17px; color: var(--ap-ink); cursor: pointer;" onclick="location.href='/my-account/'">⚹</span>
+        <button style="position: relative; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 2px; color: var(--ap-ink); font-size: 19px;" onclick="location.href='/cart/'">🛒
+          <span style="position: absolute; top: -6px; right: -8px; background: var(--ap-rust); color: rgb(255, 255, 255); font: 700 10px / 1 var(--ap-sans); min-width: 16px; height: 16px; border-radius: 9px; display: flex; align-items: center; justify-content: center; padding: 0px 3px;; display: none;"><span class="sc-interp">4</span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  
+
+  <main>
+
+  
+  
+  <div style="animation: 0.5s ease 0s 1 normal none running ap-fade;">
+
+    
+    <section style="position: relative; max-width: 1280px; margin: 0px auto; padding: clamp(32px, 6vw, 70px) clamp(16px, 4vw, 40px) clamp(40px, 6vw, 80px); display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 56px); align-items: center;">
+      <div style="flex: 1 1 360px; min-width: 0px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 22px;">
+          <span style="width: 34px; height: 1.5px; background: var(--ap-muted);"></span>
+          <span style="font: 600 11px var(--ap-sans); letter-spacing: 3px; color: var(--ap-muted); text-transform: uppercase;">__HERO_EYEBROW__</span>
+        </div>
+        <h1 style="font: 600 clamp(42px, 7vw, 78px) / 0.98 var(--ap-serif); color: var(--ap-ink); margin: 0px 0px 18px; letter-spacing: -1px;">__HERO_H1__<br><span style="font-style: italic; font-weight: 500; color: var(--ap-taupe);">__HERO_H1_EM__</span></h1>
+        <p style="font: 400 clamp(15px, 1.4vw, 18px) / 1.6 var(--ap-sans); color: var(--ap-muted2); max-width: 440px; margin: 0px 0px 30px;">__HERO_SUB__</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 40px;">
+          <button style="background: var(--ap-olive); color: var(--ap-bg2); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 16px 34px; border-radius: 40px; font: 600 14px var(--ap-sans); letter-spacing: 0.3px; cursor: pointer; box-shadow: rgba(62, 65, 46, 0.22) 0px 8px 20px;" onclick="location.href='/shop/'">__CTA1__</button>
+          <button style="background: transparent; color: var(--ap-olive); border: 1.5px solid var(--ap-cream3); padding: 16px 30px; border-radius: 40px; font: 600 14px var(--ap-sans); cursor: pointer;" onclick="location.href='/learn/'">__CTA2__</button>
+        </div>
+        <div style="display: inline-flex; background: var(--ap-bg2); border: 1px solid var(--ap-border); border-radius: 16px; overflow: hidden;">
+          <div style="padding: 16px clamp(16px, 2.4vw, 28px); text-align: center;">
+            <div style="font: 600 28px / 1 var(--ap-serif); color: var(--ap-ink);">99.9<span style="font-size: 15px; color: var(--ap-muted);">%</span></div>
+            <div style="font: 600 9px var(--ap-sans); letter-spacing: 1.6px; color: var(--ap-muted); margin-top: 6px;">PURITY</div>
+          </div>
+          <div style="width: 1px; background: var(--ap-border);"></div>
+          <div style="padding: 16px clamp(16px, 2.4vw, 28px); text-align: center;">
+            <div style="font: 600 28px / 1 var(--ap-serif); color: var(--ap-ink);">20k<span style="font-size: 15px; color: var(--ap-muted);">+</span></div>
+            <div style="font: 600 9px var(--ap-sans); letter-spacing: 1.6px; color: var(--ap-muted); margin-top: 6px;">RESEARCHERS</div>
+          </div>
+          <div style="width: 1px; background: var(--ap-border);"></div>
+          <div style="padding: 16px clamp(16px, 2.4vw, 28px); text-align: center;">
+            <div style="font: 600 28px / 1 var(--ap-serif); color: var(--ap-ink);">24<span style="font-size: 15px; color: var(--ap-muted);">h</span></div>
+            <div style="font: 600 9px var(--ap-sans); letter-spacing: 1.6px; color: var(--ap-muted); margin-top: 6px;">DISPATCH</div>
+          </div>
+        </div>
+      </div>
+      <div style="flex: 1 1 320px; position: relative; display: flex; justify-content: center; min-width: 0px;">
+        <div style="position: absolute; width: min(92%, 460px); aspect-ratio: 1 / 1; border-radius: 50%; background: radial-gradient(circle, var(--ap-border), var(--ap-bg)); top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <img src="__HERO_IMAGE__" alt="__BRAND__ research peptides" style="position: relative; width: min(100%, 540px); height: auto; filter: drop-shadow(rgba(40, 40, 30, 0.22) 0px 24px 40px);">
+        <div style="position: absolute; bottom: 8%; right: 2%; background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 12px; padding: 12px 16px; box-shadow: rgba(40, 40, 30, 0.12) 0px 12px 26px; display: flex; align-items: center; gap: 10px;">
+          <span style="width: 30px; height: 30px; border-radius: 50%; background: rgb(234, 240, 234); color: var(--ap-green-ok); display: flex; align-items: center; justify-content: center; font-size: 15px;">✓</span>
+          <div>
+            <div style="font: 700 12px var(--ap-sans); color: var(--ap-ink);">HPLC Verified</div>
+            <div style="font: 500 10px var(--ap-sans); color: var(--ap-muted);">Batch COA available</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section style="background: var(--ap-dark); color: var(--ap-cream2);">
+      <div style="max-width: 1280px; margin: 0px auto; padding: 18px clamp(16px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px 28px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B9C3A6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5 5-5.5"></path></svg>
+          <div><div style="font: 700 12px var(--ap-sans); color: var(--ap-bg2); letter-spacing: 0.2px;">Third-Party HPLC Tested</div><div style="font: 400 11px var(--ap-sans); color: var(--ap-muted2);">COA for every batch</div></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B9C3A6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+          <div><div style="font: 700 12px var(--ap-sans); color: var(--ap-bg2); letter-spacing: 0.2px;">Fast Dispatch</div><div style="font: 400 11px var(--ap-sans); color: var(--ap-muted2);">No customs delays</div></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B9C3A6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5V12l3 1.8"></path></svg>
+          <div><div style="font: 700 12px var(--ap-sans); color: var(--ap-bg2); letter-spacing: 0.2px;">Same-Day Dispatch</div><div style="font: 400 11px var(--ap-sans); color: var(--ap-muted2);">Order before 2 PM ET</div></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B9C3A6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.6v5.4c0 4.6-3.1 7.6-7 8.8-3.9-1.2-7-4.2-7-8.8V5.6L12 3Z"></path><path d="M9 11.6l2 2 4-4.2"></path></svg>
+          <div><div style="font: 700 12px var(--ap-sans); color: var(--ap-bg2); letter-spacing: 0.2px;">Reship Guarantee</div><div style="font: 400 11px var(--ap-sans); color: var(--ap-muted2);">Lost-package protection</div></div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section style="max-width: 1280px; margin: 0px auto; padding: clamp(40px, 6vw, 72px) clamp(16px, 4vw, 40px) 0px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 26px; flex-wrap: wrap;">
+        <div>
+          <div style="font: 600 11px var(--ap-sans); letter-spacing: 3px; color: var(--ap-muted); text-transform: uppercase; margin-bottom: 8px;">Browse by goal</div>
+          <h2 style="font: 600 clamp(26px, 3.4vw, 38px) / 1 var(--ap-serif); margin: 0px; color: var(--ap-ink);">Find your research category</h2>
+        </div>
+        <a style="font: 600 13px var(--ap-sans); color: var(--ap-olive); cursor: pointer; border-bottom: 1.5px solid var(--ap-cream3); padding-bottom: 2px;" href="/shop/">View all 40+ →</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px;">
+        
+          <button class="scp0" style="text-align: left; background: var(--ap-bg2); border: 1px solid var(--ap-border); border-radius: 14px; padding: 20px 18px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; min-height: 132px; display: flex; flex-direction: column; justify-content: space-between;" onclick="location.href='/shop/?category=healing'">
+            <span style="font-size: 22px;"><span class="sc-interp">✚</span></span>
+            <div>
+              <div style="font: 600 15px var(--ap-serif); color: var(--ap-ink); margin-bottom: 3px;"><span class="sc-interp">Healing &amp; Recovery</span></div>
+              <div style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">6</span> products</div>
+            </div>
+          </button>
+        
+          <button class="scp0" style="text-align: left; background: var(--ap-bg2); border: 1px solid var(--ap-border); border-radius: 14px; padding: 20px 18px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; min-height: 132px; display: flex; flex-direction: column; justify-content: space-between;" onclick="location.href='/shop/?category=energy'">
+            <span style="font-size: 22px;"><span class="sc-interp">▲</span></span>
+            <div>
+              <div style="font: 600 15px var(--ap-serif); color: var(--ap-ink); margin-bottom: 3px;"><span class="sc-interp">Growth Hormone</span></div>
+              <div style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">9</span> products</div>
+            </div>
+          </button>
+        
+          <button class="scp0" style="text-align: left; background: var(--ap-bg2); border: 1px solid var(--ap-border); border-radius: 14px; padding: 20px 18px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; min-height: 132px; display: flex; flex-direction: column; justify-content: space-between;" onclick="location.href='/shop/?category=weight-loss'">
+            <span style="font-size: 22px;"><span class="sc-interp">◉</span></span>
+            <div>
+              <div style="font: 600 15px var(--ap-serif); color: var(--ap-ink); margin-bottom: 3px;"><span class="sc-interp">Metabolic</span></div>
+              <div style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">9</span> products</div>
+            </div>
+          </button>
+        
+          <button class="scp0" style="text-align: left; background: var(--ap-bg2); border: 1px solid var(--ap-border); border-radius: 14px; padding: 20px 18px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; min-height: 132px; display: flex; flex-direction: column; justify-content: space-between;" onclick="location.href='/shop/?category=brain'">
+            <span style="font-size: 22px;"><span class="sc-interp">⚡</span></span>
+            <div>
+              <div style="font: 600 15px var(--ap-serif); color: var(--ap-ink); margin-bottom: 3px;"><span class="sc-interp">Cognitive</span></div>
+              <div style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">6</span> products</div>
+            </div>
+          </button>
+        
+          <button class="scp0" style="text-align: left; background: var(--ap-bg2); border: 1px solid var(--ap-border); border-radius: 14px; padding: 20px 18px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; min-height: 132px; display: flex; flex-direction: column; justify-content: space-between;" onclick="location.href='/shop/?category=skin'">
+            <span style="font-size: 22px;"><span class="sc-interp">✦</span></span>
+            <div>
+              <div style="font: 600 15px var(--ap-serif); color: var(--ap-ink); margin-bottom: 3px;"><span class="sc-interp">Cosmetic</span></div>
+              <div style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">4</span> products</div>
+            </div>
+          </button>
+        
+          <button class="scp0" style="text-align: left; background: var(--ap-bg2); border: 1px solid var(--ap-border); border-radius: 14px; padding: 20px 18px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; min-height: 132px; display: flex; flex-direction: column; justify-content: space-between;" onclick="location.href='/shop/?category=stacks'">
+            <span style="font-size: 22px;"><span class="sc-interp">∞</span></span>
+            <div>
+              <div style="font: 600 15px var(--ap-serif); color: var(--ap-ink); margin-bottom: 3px;"><span class="sc-interp">Longevity</span></div>
+              <div style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">4</span> products</div>
+            </div>
+          </button>
+        
+      </div>
+    </section>
+
+    
+    <section style="max-width: 1280px; margin: 0px auto; padding: clamp(40px, 6vw, 72px) clamp(16px, 4vw, 40px);">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 26px; flex-wrap: wrap;">
+        <div>
+          <div style="font: 600 11px var(--ap-sans); letter-spacing: 3px; color: var(--ap-muted); text-transform: uppercase; margin-bottom: 8px;">Weekly Top 10</div>
+          <h2 style="font: 600 clamp(26px, 3.4vw, 38px) / 1 var(--ap-serif); margin: 0px; color: var(--ap-ink);">Best-selling peptides</h2>
+        </div>
+        <a style="font: 600 13px var(--ap-sans); color: var(--ap-olive); cursor: pointer; border-bottom: 1.5px solid var(--ap-cream3); padding-bottom: 2px;" href="/shop/">Shop all →</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 215px), 1fr)); gap: clamp(12px, 1.6vw, 20px);">
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+                <span style="position: absolute; top: 12px; left: 12px; z-index: 2; font: 700 9px var(--ap-sans); letter-spacing: 1px; text-transform: uppercase; padding: 5px 9px; border-radius: 20px;"><span class="sc-interp">Best Seller</span></span>
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">BPC-157</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Healing &amp; Recovery</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">BPC-157</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">412</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$92.99</span></span>
+                
+                  <span style="font: 500 12px var(--ap-sans); color: var(--ap-muted2); text-decoration: line-through;"><span class="sc-interp">$102.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+                <span style="position: absolute; top: 12px; left: 12px; z-index: 2; font: 700 9px var(--ap-sans); letter-spacing: 1px; text-transform: uppercase; padding: 5px 9px; border-radius: 20px;"><span class="sc-interp">Best Seller</span></span>
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">BPC-157 + TB-</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Blends</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">BPC-157 + TB-500</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">198</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$176.99</span></span>
+                
+                  <span style="font: 500 12px var(--ap-sans); color: var(--ap-muted2); text-decoration: line-through;"><span class="sc-interp">$199.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+                <span style="position: absolute; top: 12px; left: 12px; z-index: 2; font: 700 9px var(--ap-sans); letter-spacing: 1px; text-transform: uppercase; padding: 5px 9px; border-radius: 20px;"><span class="sc-interp">Best Seller</span></span>
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">GHK-Cu</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Cosmetic</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">GHK-Cu</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">341</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$49.99</span></span>
+                
+                  <span style="font: 500 12px var(--ap-sans); color: var(--ap-muted2); text-decoration: line-through;"><span class="sc-interp">$59.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+                <span style="position: absolute; top: 12px; left: 12px; z-index: 2; font: 700 9px var(--ap-sans); letter-spacing: 1px; text-transform: uppercase; padding: 5px 9px; border-radius: 20px;"><span class="sc-interp">Best Seller</span></span>
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">CJC-1295 + Ip</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Growth Hormone</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">CJC-1295 + Ipamorelin</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">254</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$94.99</span></span>
+                
+                  <span style="font: 500 12px var(--ap-sans); color: var(--ap-muted2); text-decoration: line-through;"><span class="sc-interp">$104.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+                <span style="position: absolute; top: 12px; left: 12px; z-index: 2; font: 700 9px var(--ap-sans); letter-spacing: 1px; text-transform: uppercase; padding: 5px 9px; border-radius: 20px;"><span class="sc-interp">Best Seller</span></span>
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">Klow</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Blends</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Klow</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">77</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$179.99</span></span>
+                
+                  <span style="font: 500 12px var(--ap-sans); color: var(--ap-muted2); text-decoration: line-through;"><span class="sc-interp">$249.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+                <span style="position: absolute; top: 12px; left: 12px; z-index: 2; font: 700 9px var(--ap-sans); letter-spacing: 1px; text-transform: uppercase; padding: 5px 9px; border-radius: 20px;"><span class="sc-interp">Best Seller</span></span>
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">Retatrutide</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Metabolic</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Retatrutide</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">213</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$159.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+                <span style="position: absolute; top: 12px; left: 12px; z-index: 2; font: 700 9px var(--ap-sans); letter-spacing: 1px; text-transform: uppercase; padding: 5px 9px; border-radius: 20px;"><span class="sc-interp">Best Seller</span></span>
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">Tirzepatide</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Metabolic</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Tirzepatide</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">287</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$149.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+                <span style="position: absolute; top: 12px; left: 12px; z-index: 2; font: 700 9px var(--ap-sans); letter-spacing: 1px; text-transform: uppercase; padding: 5px 9px; border-radius: 20px;"><span class="sc-interp">Best Seller</span></span>
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">Semaglutide</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Metabolic</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Semaglutide</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">331</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$129.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">Bacteriostati</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Accessories</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Bacteriostatic Water</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">401</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$14.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+          <div class="scp1" onclick="location.href='/shop/'" style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s;">
+            <div style="position: relative; aspect-ratio: 1 / 1; background: radial-gradient(120% 100% at 50% 0%, var(--ap-bg3), var(--ap-bg2)); display: flex; align-items: center; justify-content: center;">
+              
+              <span style="position: absolute; top: 10px; right: 12px; z-index: 2; font-size: 16px; color: var(--ap-cream3);">♡</span>
+              <div style="width: 54px; display: flex; flex-direction: column; align-items: center; filter: drop-shadow(rgba(40, 40, 30, 0.14) 0px 8px 12px);">
+                <div style="width: 28px; height: 13px; background: var(--ap-dark2); border-radius: 5px 5px 2px 2px;"></div>
+                <div style="width: 24px; height: 6px; background: var(--ap-cream3); border-radius: 0px 0px 2px 2px;"></div>
+                <div style="position: relative; width: 50px; height: 92px; margin-top: 3px; background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)); border: 1px solid var(--ap-border); border-radius: 5px 5px 8px 8px; overflow: hidden;">
+                  <div style="position: absolute; inset: 30% 0px 14%; background: var(--ap-bg2); border-top: 1px solid var(--ap-border2); border-bottom: 1px solid var(--ap-border2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 2px;">
+                    <div style="width: 6px; height: 6px; border: 1.4px solid var(--ap-blue); border-radius: 50%;"></div>
+                    <div style="font: 700 7px / 1.05 var(--ap-sans); color: var(--ap-olive); text-align: center; letter-spacing: 0.2px;"><span class="sc-interp">Alcohol Wipes</span></div>
+                  </div>
+                  <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 10%; background: var(--ap-olive);"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 0%;">
+              <div style="font: 500 10px var(--ap-sans); letter-spacing: 0.6px; color: var(--ap-muted2); text-transform: uppercase;"><span class="sc-interp">Accessories</span></div>
+              <div style="font: 600 16px / 1.15 var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Alcohol Wipes (100pk)</span></div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 1px;">
+                <span style="color: var(--ap-gold); font-size: 12px; letter-spacing: 1px;">★★★★★</span>
+                <span style="font: 500 11px var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">356</span></span>
+              </div>
+              <div style="margin-top: auto; display: flex; align-items: baseline; gap: 8px; padding-top: 6px;">
+                <span style="font: 700 16px var(--ap-sans); color: var(--ap-ink);"><span class="sc-interp">$9.99</span></span>
+                
+              </div>
+            </div>
+          </div>
+        
+      </div>
+      <div style="display: flex; justify-content: center; margin-top: 38px;">
+        <button style="background: var(--ap-olive); color: var(--ap-bg2); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 16px 42px; border-radius: 40px; font: 600 14px var(--ap-sans); letter-spacing: 0.3px; cursor: pointer; box-shadow: rgba(62, 65, 46, 0.22) 0px 8px 20px;" onclick="location.href='/shop/'">See All Products →</button>
+      </div>
+    </section>
+
+    
+    <section style="background: var(--ap-taupe); color: var(--ap-bg);">
+      <div style="max-width: 880px; margin: 0px auto; padding: clamp(48px, 7vw, 96px) clamp(20px, 4vw, 40px); text-align: center;">
+        <div style="font: 600 11px var(--ap-sans); letter-spacing: 3px; color: var(--ap-border2); text-transform: uppercase; margin-bottom: 22px;">Why We're Here</div>
+        <h2 style="font: 600 clamp(28px, 4.4vw, 52px) / 1.12 var(--ap-serif); color: var(--ap-bg2); margin: 0px 0px 30px; letter-spacing: -0.3px;">__STORY_H1__<br>__STORY_H2__</h2>
+        <div style="display: flex; flex-direction: column; gap: 22px; max-width: 720px; margin: 0px auto;">
+          <p style="font: 400 clamp(15px, 1.5vw, 17px) / 1.7 var(--ap-sans); color: var(--ap-cream2); margin: 0px;">We started with a simple frustration: it was too hard to find research peptides you could actually trust. Inconsistent labeling, no real testing, slow shipping. We knew serious researchers deserved better.</p>
+          <p style="font: 400 clamp(15px, 1.5vw, 17px) / 1.7 var(--ap-sans); color: var(--ap-cream2); margin: 0px;">So we built a source held to a higher standard — independent HPLC and mass-spec testing on every batch, honest labeling, and fast, dependable fulfillment. What you order is exactly what arrives.</p>
+          <p style="font: 400 clamp(15px, 1.5vw, 17px) / 1.7 var(--ap-sans); color: var(--ap-cream2); margin: 0px;">Our mission is straightforward: give researchers materials they can rely on, and the data to back them up — every order, every time.</p>
+        </div>
+        <div style="width: 56px; height: 1.5px; background: var(--ap-muted2); margin: 38px auto 26px;"></div>
+        <div style="font: italic 500 clamp(16px, 1.8vw, 21px) var(--ap-serif); color: rgb(239, 233, 219);">__FOUNDER_TAGLINE__</div>
+      </div>
+    </section>
+
+    
+    <section style="background: var(--ap-bg2); border-top: 1px solid var(--ap-border); border-bottom: 1px solid var(--ap-border);">
+      <div style="max-width: 1280px; margin: 0px auto; padding: clamp(48px, 7vw, 90px) clamp(16px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center;">
+        <div>
+          <div style="font: 600 11px var(--ap-sans); letter-spacing: 3px; color: var(--ap-muted); text-transform: uppercase; margin-bottom: 12px;">The __BRAND__ Standard</div>
+          <h2 style="font: 600 clamp(28px, 3.6vw, 44px) / 1.05 var(--ap-serif); margin: 0px 0px 18px; color: var(--ap-ink); letter-spacing: -0.5px;">Purity you can verify, <span style="font-style: italic; color: var(--ap-taupe);">not just trust.</span></h2>
+          <p style="font: 400 15px / 1.65 var(--ap-sans); color: var(--ap-muted2); max-width: 460px; margin: 0px 0px 26px;">Every batch is independently HPLC and mass-spec tested before it ships. Scan the lot number on your vial to pull the exact certificate of analysis for what's in your hand.</p>
+          <button style="background: var(--ap-olive); color: var(--ap-bg2); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 14px 28px; border-radius: 40px; font: 600 13px var(--ap-sans); cursor: pointer;" onclick="location.href='/coa-library/'">See our testing process</button>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          
+            <div style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; padding: 22px 20px;">
+              <div style="font: 600 30px / 1 var(--ap-serif); color: var(--ap-olive); margin-bottom: 8px;"><span class="sc-interp">99.9%</span></div>
+              <div style="font: 700 13px var(--ap-sans); color: var(--ap-ink); margin-bottom: 4px;"><span class="sc-interp">Verified Purity</span></div>
+              <div style="font: 400 12px / 1.45 var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">HPLC + mass-spec on every lot</span></div>
+            </div>
+          
+            <div style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; padding: 22px 20px;">
+              <div style="font: 600 30px / 1 var(--ap-serif); color: var(--ap-olive); margin-bottom: 8px;"><span class="sc-interp">104%</span></div>
+              <div style="font: 700 13px var(--ap-sans); color: var(--ap-ink); margin-bottom: 4px;"><span class="sc-interp">Honest Fill</span></div>
+              <div style="font: 400 12px / 1.45 var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">Vials filled above label weight</span></div>
+            </div>
+          
+            <div style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; padding: 22px 20px;">
+              <div style="font: 600 30px / 1 var(--ap-serif); color: var(--ap-olive); margin-bottom: 8px;"><span class="sc-interp">24h</span></div>
+              <div style="font: 700 13px var(--ap-sans); color: var(--ap-ink); margin-bottom: 4px;"><span class="sc-interp">Fast Dispatch</span></div>
+              <div style="font: 400 12px / 1.45 var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">Same-day before 2 PM ET</span></div>
+            </div>
+          
+            <div style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 14px; padding: 22px 20px;">
+              <div style="font: 600 30px / 1 var(--ap-serif); color: var(--ap-olive); margin-bottom: 8px;"><span class="sc-interp">100%</span></div>
+              <div style="font: 700 13px var(--ap-sans); color: var(--ap-ink); margin-bottom: 4px;"><span class="sc-interp">In-house</span></div>
+              <div style="font: 400 12px / 1.45 var(--ap-sans); color: var(--ap-muted);"><span class="sc-interp">Reliable fulfillment &amp; support</span></div>
+            </div>
+          
+        </div>
+      </div>
+    </section>
+
+    
+    <section style="max-width: 1280px; margin: 0px auto; padding: clamp(48px, 7vw, 90px) clamp(16px, 4vw, 40px);">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <div style="font: 600 11px var(--ap-sans); letter-spacing: 3px; color: var(--ap-muted); text-transform: uppercase; margin-bottom: 10px;">Knowledge Hub</div>
+        <h2 style="font: 600 clamp(28px, 3.6vw, 42px) / 1 var(--ap-serif); margin: 0px; color: var(--ap-ink);">Explore our research resources</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px;">
+        
+          <div style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 16px; padding: 30px 26px; display: flex; flex-direction: column; gap: 12px;">
+            <span style="width: 46px; height: 46px; border-radius: 12px; background: rgb(238, 241, 234); color: var(--ap-green-ok); display: flex; align-items: center; justify-content: center; font-size: 22px;"><span class="sc-interp">▤</span></span>
+            <div style="font: 600 19px var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Batch-Tested COA Reports</span></div>
+            <div style="font: 400 13px / 1.55 var(--ap-sans); color: var(--ap-muted2); flex: 1 1 0%;"><span class="sc-interp">Look up the exact certificate of analysis for the lot number printed on your vial.</span></div>
+            <a style="font: 600 13px var(--ap-sans); color: var(--ap-olive); cursor: pointer;" href="/coa-library/"><span class="sc-interp">View COAs</span> →</a>
+          </div>
+        
+          <div style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 16px; padding: 30px 26px; display: flex; flex-direction: column; gap: 12px;">
+            <span style="width: 46px; height: 46px; border-radius: 12px; background: rgb(238, 241, 234); color: var(--ap-green-ok); display: flex; align-items: center; justify-content: center; font-size: 22px;"><span class="sc-interp">✎</span></span>
+            <div style="font: 600 19px var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Peptide Learning Centre</span></div>
+            <div style="font: 400 13px / 1.55 var(--ap-sans); color: var(--ap-muted2); flex: 1 1 0%;"><span class="sc-interp">Plain-language guides on what each compound is studied for, sourcing, and handling.</span></div>
+            <a style="font: 600 13px var(--ap-sans); color: var(--ap-olive); cursor: pointer;" href="/learn/"><span class="sc-interp">Start learning</span> →</a>
+          </div>
+        
+          <div style="background: var(--ap-bg3); border: 1px solid var(--ap-border); border-radius: 16px; padding: 30px 26px; display: flex; flex-direction: column; gap: 12px;">
+            <span style="width: 46px; height: 46px; border-radius: 12px; background: rgb(238, 241, 234); color: var(--ap-green-ok); display: flex; align-items: center; justify-content: center; font-size: 22px;"><span class="sc-interp">⌗</span></span>
+            <div style="font: 600 19px var(--ap-serif); color: var(--ap-ink);"><span class="sc-interp">Research Resource Library</span></div>
+            <div style="font: 400 13px / 1.55 var(--ap-sans); color: var(--ap-muted2); flex: 1 1 0%;"><span class="sc-interp">Storage, reconstitution, and dosing-calculator tools built for the bench.</span></div>
+            <a style="font: 600 13px var(--ap-sans); color: var(--ap-olive); cursor: pointer;" href="/learn/"><span class="sc-interp">Explore tools</span> →</a>
+          </div>
+        
+      </div>
+    </section>
+
+    
+    <section style="background: var(--ap-dark); color: var(--ap-bg);">
+      <div style="max-width: 1280px; margin: 0px auto; padding: clamp(44px, 6vw, 80px) clamp(16px, 4vw, 40px);">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 36px; flex-wrap: wrap; text-align: center;">
+          <span style="color: var(--ap-gold); font-size: 17px; letter-spacing: 2px;">★★★★★</span>
+          <span style="font: 600 14px var(--ap-sans); color: var(--ap-bg2);">4.9 / 5 from 6,200+ verified researchers</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px;">
+          
+            <div style="background: var(--ap-ink2); border: 1px solid var(--ap-olive-h); border-radius: 14px; padding: 24px 22px;">
+              <span style="color: var(--ap-gold); font-size: 13px; letter-spacing: 1.5px;">★★★★★</span>
+              <p style="font: 400 14px / 1.6 var(--ap-sans); color: var(--ap-bg); margin: 12px 0px 16px;"><span class="sc-interp">COAs match every batch and dispatch is genuinely same-day. The only In-house source I reorder from.</span></p>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="width: 32px; height: 32px; border-radius: 50%; background: var(--ap-olive); border: 1px solid var(--ap-muted2); display: flex; align-items: center; justify-content: center; font: 700 12px var(--ap-sans); color: var(--ap-border2);"><span class="sc-interp">MR</span></span>
+                <div>
+                  <div style="font: 600 12px var(--ap-sans); color: var(--ap-bg2);"><span class="sc-interp">Dr. M. Reyes</span></div>
+                  <div style="font: 500 10px var(--ap-sans); color: var(--ap-muted2);">Verified Buyer</div>
+                </div>
+              </div>
+            </div>
+          
+            <div style="background: var(--ap-ink2); border: 1px solid var(--ap-olive-h); border-radius: 14px; padding: 24px 22px;">
+              <span style="color: var(--ap-gold); font-size: 13px; letter-spacing: 1.5px;">★★★★★</span>
+              <p style="font: 400 14px / 1.6 var(--ap-sans); color: var(--ap-bg); margin: 12px 0px 16px;"><span class="sc-interp">Packaging is clean, labeling is consistent, and the lot lookup actually works. Exactly what research ordering should feel like.</span></p>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="width: 32px; height: 32px; border-radius: 50%; background: var(--ap-olive); border: 1px solid var(--ap-muted2); display: flex; align-items: center; justify-content: center; font: 700 12px var(--ap-sans); color: var(--ap-border2);"><span class="sc-interp">JW</span></span>
+                <div>
+                  <div style="font: 600 12px var(--ap-sans); color: var(--ap-bg2);"><span class="sc-interp">J. Whitfield</span></div>
+                  <div style="font: 500 10px var(--ap-sans); color: var(--ap-muted2);">Verified Buyer</div>
+                </div>
+              </div>
+            </div>
+          
+            <div style="background: var(--ap-ink2); border: 1px solid var(--ap-olive-h); border-radius: 14px; padding: 24px 22px;">
+              <span style="color: var(--ap-gold); font-size: 13px; letter-spacing: 1.5px;">★★★★★</span>
+              <p style="font: 400 14px / 1.6 var(--ap-sans); color: var(--ap-bg); margin: 12px 0px 16px;"><span class="sc-interp">Switched over from an overseas vendor. No customs headaches, arrived in three days, purity was spot on.</span></p>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="width: 32px; height: 32px; border-radius: 50%; background: var(--ap-olive); border: 1px solid var(--ap-muted2); display: flex; align-items: center; justify-content: center; font: 700 12px var(--ap-sans); color: var(--ap-border2);"><span class="sc-interp">AK</span></span>
+                <div>
+                  <div style="font: 600 12px var(--ap-sans); color: var(--ap-bg2);"><span class="sc-interp">A. Kovac</span></div>
+                  <div style="font: 500 10px var(--ap-sans); color: var(--ap-muted2);">Verified Buyer</div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    </section>
+
+    
+    <section style="max-width: 760px; margin: 0px auto; padding: clamp(48px, 7vw, 90px) clamp(16px, 4vw, 40px); text-align: center;">
+      <h2 style="font: 600 clamp(26px, 3.4vw, 38px) / 1.1 var(--ap-serif); margin: 0px 0px 12px; color: var(--ap-ink);">Join the research list</h2>
+      <p style="font: 400 15px / 1.6 var(--ap-sans); color: var(--ap-muted2); margin: 0px 0px 26px;">New batch COAs, restocks, and member-only pricing. No noise.</p>
+      <div style="display: flex; gap: 10px; max-width: 440px; margin: 0px auto; flex-wrap: wrap;">
+        <input placeholder="you@lab.com" style="flex: 1 1 0%; min-width: 200px; padding: 15px 18px; border: 1px solid var(--ap-border2); border-radius: 40px; background: var(--ap-bg3); font: 400 14px var(--ap-sans); color: var(--ap-ink); outline: none;">
+        <button style="background: var(--ap-olive); color: var(--ap-bg2); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 15px 30px; border-radius: 40px; font: 600 14px var(--ap-sans); cursor: pointer;">Subscribe</button>
+      </div>
+    </section>
+
+  </div>
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+  </main>
+
+  
+  <footer style="background: var(--ap-ink); color: var(--ap-cream3);">
+    <div style="max-width: 1280px; margin: 0px auto; padding: clamp(40px, 5vw, 64px) clamp(16px, 4vw, 40px) 28px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px;">
+      <div style="grid-column: 1 / -1; max-width: 1280px;"></div>
+    </div>
+    <div style="max-width: 1280px; margin: 0px auto; padding: 0px clamp(16px, 4vw, 40px) 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 32px;">
+      <div style="min-width: 200px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <span style="width: 28px; height: 28px; border-radius: 50%; border: 1.4px solid rgb(110, 122, 140); display: flex; align-items: center; justify-content: center; color: rgb(159, 176, 196); font-size: 15px;">⚓</span>
+          <span style="font: 600 18px var(--ap-serif); color: var(--ap-bg2);">__BRAND__</span>
+        </div>
+        <p style="font: 400 12.5px / 1.6 var(--ap-sans); color: var(--ap-muted2); max-width: 280px; margin: 0px 0px 14px;">A trusted source for third-party HPLC-tested research peptides, shipped fast from our own fulfillment centre.</p>
+        <div style="font: 500 11px / 1.6 var(--ap-sans); color: var(--ap-muted);">For laboratory &amp; research use only.<br>Not for human consumption.</div>
+      </div>
+      
+        <div>
+          <div style="font: 700 11px var(--ap-sans); letter-spacing: 1.6px; color: var(--ap-border2); text-transform: uppercase; margin-bottom: 14px;"><span class="sc-interp">Shop</span></div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/shop/"><span class="sc-interp">All Peptides</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/shop/"><span class="sc-interp">Best Sellers</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/shop/?category=stacks"><span class="sc-interp">Blends</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/shop/"><span class="sc-interp">Nasal Sprays</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/shop/?category=supplies"><span class="sc-interp">Accessories</span></a>
+            
+          </div>
+        </div>
+      
+        <div>
+          <div style="font: 700 11px var(--ap-sans); letter-spacing: 1.6px; color: var(--ap-border2); text-transform: uppercase; margin-bottom: 14px;"><span class="sc-interp">Learn</span></div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/learn/"><span class="sc-interp">Peptide Learning Centre</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/coa-library/"><span class="sc-interp">COA Lookup</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/learn/"><span class="sc-interp">Dosing Calculator</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/learn/"><span class="sc-interp">Storage &amp; Handling</span></a>
+            
+          </div>
+        </div>
+      
+        <div>
+          <div style="font: 700 11px var(--ap-sans); letter-spacing: 1.6px; color: var(--ap-border2); text-transform: uppercase; margin-bottom: 14px;"><span class="sc-interp">Support</span></div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/learn/"><span class="sc-interp">Shipping &amp; Delivery</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/learn/"><span class="sc-interp">Payment Instructions</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/learn/"><span class="sc-interp">Returns &amp; Reships</span></a>
+            
+              <a style="font: 400 13px var(--ap-sans); color: var(--ap-muted2); cursor: pointer;" href="/my-account/"><span class="sc-interp">Contact Us</span></a>
+            
+          </div>
+        </div>
+      
+    </div>
+    <div style="border-top: 1px solid var(--ap-ink2);">
+      <div style="max-width: 1280px; margin: 0px auto; padding: 18px clamp(16px, 4vw, 40px); display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;">
+        <span style="font: 400 11.5px var(--ap-sans); color: var(--ap-muted);">© 2026 __BRAND__. All rights reserved.</span>
+        <span style="font: 400 11.5px var(--ap-sans); color: var(--ap-muted);">Secure checkout · Same-day dispatch · Fast shipping</span>
+      </div>
+    </div>
+  </footer></div></div></div>
+</body>
+</html>
