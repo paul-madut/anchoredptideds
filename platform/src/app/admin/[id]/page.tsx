@@ -6,6 +6,7 @@ import { storagePublicUrl } from '@/lib/buildConfig';
 import type { SiteRequest } from '@/lib/types';
 import Preview from '@/components/Preview';
 import DeployButton from '@/components/DeployButton';
+import BuildFilesButton from '@/components/BuildFilesButton';
 import GenerateButton from '@/components/GenerateButton';
 import HtmlReview from '@/components/HtmlReview';
 import { saveTarget, setStatus } from './actions';
@@ -60,25 +61,46 @@ export default async function RequestDetail({ params }: { params: { id: string }
           </div>
         )}
 
+        {/* FINAL STEP — the deliverable is the WordPress files themselves. */}
         <div className="card" style={{ padding: 16 }}>
-          <b style={{ fontSize: 14 }}>Deploy target</b>
-          <form action={saveTargetBound} style={{ display: 'grid', gap: 10, marginTop: 10 }}>
+          <b style={{ fontSize: 14, display: 'block', marginBottom: 4 }}>WordPress files</b>
+          <p className="muted" style={{ fontSize: 12, margin: '0 0 12px' }}>
+            Builds the theme + plugin bundle from the reviewed design — ready to install on any WordPress + WooCommerce site. No customer login needed.
+          </p>
+          {row.html_url ? (
+            <>
+              <BuildFilesButton id={row.id} hasBundle={!!row.bundle_url} />
+              {row.bundle_url && (
+                <div style={{ marginTop: 12 }}>
+                  <a className="btn-ghost" href={row.bundle_url} download style={{ borderRadius: 40, padding: '10px 16px', display: 'inline-block', textDecoration: 'none' }}>Download WordPress bundle ↓</a>
+                  <ul className="muted" style={{ fontSize: 12, margin: '10px 0 0', paddingLeft: 18, lineHeight: 1.7 }}>
+                    <li>theme — <code>anchored-peptides</code></li>
+                    <li>plugins — homepage, brand config, provisioner</li>
+                    <li><code>products.csv</code> — the WooCommerce catalog</li>
+                    <li><code>INSTALL.md</code> — step-by-step install</li>
+                  </ul>
+                </div>
+              )}
+            </>
+          ) : (
+            <p className="muted" style={{ fontSize: 12, margin: 0 }}>Approve the design first — the files are built from the reviewed HTML.</p>
+          )}
+        </div>
+
+        {/* OPTIONAL — instead of installing by hand, let the provisioner push it. */}
+        <div className="card" style={{ padding: 16 }}>
+          <span className="eyebrow" style={{ fontSize: 11 }}>Optional</span>
+          <b style={{ fontSize: 14, display: 'block', margin: '4px 0' }}>Have AI install it for you</b>
+          <p className="muted" style={{ fontSize: 12, margin: '0 0 12px' }}>
+            Point us at the customer’s WordPress and we’ll push the same files, apply the branding, and import the catalog automatically over the REST provisioner.
+          </p>
+          <form action={saveTargetBound} style={{ display: 'grid', gap: 10, marginBottom: 12 }}>
             <input name="target_wp_url" defaultValue={row.target_wp_url ?? ''} placeholder="https://customer-site.com" />
             <input name="target_wp_user" defaultValue={row.target_wp_user ?? ''} placeholder="WordPress admin username" />
             <input name="target_wp_app_password" type="password" placeholder={row.target_wp_app_password ? 'Application Password (unchanged)' : 'Application Password'} />
             <button className="btn-ghost" style={{ borderRadius: 40, padding: '10px 16px', cursor: 'pointer' }}>Save target</button>
           </form>
-        </div>
-
-        <div className="card" style={{ padding: 16 }}>
-          <b style={{ fontSize: 14, display: 'block', marginBottom: 4 }}>Activate site</b>
-          <p className="muted" style={{ fontSize: 12, margin: '0 0 12px' }}>Turns the reviewed HTML into the WordPress theme + plugins and deploys to the target with the customer’s login.</p>
           <DeployButton id={row.id} initialStatus={row.status} ready={ready} />
-          {row.bundle_url && (
-            <p style={{ fontSize: 12, margin: '10px 0 0' }}>
-              <a href={row.bundle_url} download>Download WordPress bundle ↓</a> <span className="muted">(the generated theme + plugins)</span>
-            </p>
-          )}
         </div>
 
         <div className="card" style={{ padding: 16 }}>
@@ -99,10 +121,8 @@ export default async function RequestDetail({ params }: { params: { id: string }
       <div style={{ position: 'sticky', top: 88 }}>
         <div className="eyebrow" style={{ marginBottom: 10 }}>Preview</div>
         <div className="card" style={{ overflow: 'hidden', padding: 8 }}>
-          <div style={{ maxHeight: 640, overflow: 'auto', borderRadius: 10 }}>
-            <div style={{ transform: 'scale(0.96)', transformOrigin: 'top center' }}>
-              <Preview tokens={tokens} fonts={fonts} brandName={row.business_name ?? 'Brand'} logoUrl={logoUrl} heroImageUrl={heroUrl} copy={row.copy ?? {}} />
-            </div>
+          <div style={{ maxHeight: 640, overflow: 'auto', borderRadius: 10, background: tokens['--ap-bg'] ?? '#fff' }}>
+            <Preview tokens={tokens} fonts={fonts} brandName={row.business_name ?? 'Brand'} logoUrl={logoUrl} heroImageUrl={heroUrl} copy={row.copy ?? {}} />
           </div>
         </div>
       </div>

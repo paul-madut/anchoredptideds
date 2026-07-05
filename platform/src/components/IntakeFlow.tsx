@@ -351,13 +351,13 @@ export default function IntakeFlow({ presets }: { presets: Preset[] }) {
   );
 }
 
-/* ---------- Preview box (fluid + responsive, lightly scaled) ---------- */
+/* ---------- Preview box: fills the frame edge-to-edge; the scroll area
+   inherits the site's page background so shorter content doesn't leave a
+   mismatched white band below. ---------- */
 function PreviewStage(props: React.ComponentProps<typeof Preview>) {
   return (
-    <div style={{ position: 'absolute', inset: 0, overflow: 'auto' }}>
-      <div style={{ transform: 'scale(0.94)', transformOrigin: 'top center' }}>
-        <Preview {...props} />
-      </div>
+    <div style={{ position: 'absolute', inset: 0, overflow: 'auto', background: props.tokens['--ap-bg'] ?? '#fff' }}>
+      <Preview {...props} />
     </div>
   );
 }

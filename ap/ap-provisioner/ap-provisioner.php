@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AP Provisioner
  * Description: One-click site provisioning endpoint. Pre-installed on every target WordPress install; the CRM's "Activate" button POSTs a brand config + asset URLs and this plugin installs/activates the theme + plugins, applies branding options, sideloads logo/hero, imports the WooCommerce catalog, and scaffolds pages — turning a blank WP into a finished branded peptide store.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Anchored Peptides
  *
  * Security: the REST route requires an authenticated user with `manage_options`
@@ -14,7 +14,7 @@
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'AP_PROV_VERSION', '1.0.0' );
+define( 'AP_PROV_VERSION', '1.0.1' );
 define( 'AP_PROV_JOB_OPTION', 'ap_provision_job' );
 
 /* =========================================================
@@ -290,8 +290,20 @@ function ap_prov_import_products( $csv_url ) {
 	if ( $handle ) fclose( $handle );
 	$raw_headers = array_map( 'trim', (array) $raw_headers );
 
-	$controller = new WC_Product_CSV_Importer_Controller();
-	$mapping    = $controller->auto_map_columns( $raw_headers );
+	// WC_Product_CSV_Importer_Controller::auto_map_columns() is `protected`, so a
+	// direct call fatals on modern WooCommerce. Expose it via a tiny subclass to
+	// reuse WooCommerce's own header-mapping heuristics. Declared here (not at file
+	// top) because the parent class only exists after the include above; guarded so
+	// repeated provision runs don't redeclare it.
+	if ( ! class_exists( 'AP_Prov_CSV_Import_Controller' ) ) {
+		class AP_Prov_CSV_Import_Controller extends WC_Product_CSV_Importer_Controller {
+			public function ap_auto_map( $raw_headers ) {
+				return $this->auto_map_columns( $raw_headers );
+			}
+		}
+	}
+	$controller = new AP_Prov_CSV_Import_Controller();
+	$mapping    = $controller->ap_auto_map( $raw_headers );
 
 	$importer = new WC_Product_CSV_Importer( $tmp, array(
 		'mapping'          => $mapping,
