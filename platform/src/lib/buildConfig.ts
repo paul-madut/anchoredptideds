@@ -39,7 +39,10 @@ export function buildProvisionConfig(row: SiteRequest): ProvisionConfig {
       homepage: env('BUNDLE_HOMEPAGE_URL'),
       coming_soon: env('BUNDLE_COMING_SOON_URL'),
     },
-    products_csv_url: env('PRODUCTS_CSV_URL'),
+    // Per-site catalog built from the master `products` table at bundle time
+    // (generateBundle uploads it before deploy); env URL is the fallback.
+    products_csv_url:
+      storagePublicUrl('site-artifacts', `${row.id}/products.csv`) ?? env('PRODUCTS_CSV_URL'),
     ensure_woocommerce: true,
     coming_soon: false,
     // The reviewed/edited homepage HTML becomes the deployed front page.

@@ -7,6 +7,7 @@ import { storagePublicUrl } from './buildConfig';
 import { type SiteConfig } from './renderSite';
 import { renderHomeHtml } from './renderHome';
 import { hasOpenAI, generateImageBytes } from './openai';
+import { buildProductsCsv } from './productsCsv';
 import { generateBrandConfigPlugin } from './brandConfigPlugin';
 import type { SiteRequest } from './types';
 
@@ -28,7 +29,14 @@ export function siteConfigFor(row: SiteRequest): SiteConfig {
     copy: row.copy ?? {},
     showCategories: row.show_categories !== false,
     sellingPoints: Array.isArray(row.selling_points) ? row.selling_points : [],
+    sellingPointImages: sellingPointImageUrls(row),
   };
+}
+
+/** Public URL (or undefined) for each selling-point card's stored image path. */
+export function sellingPointImageUrls(row: SiteRequest): (string | undefined)[] {
+  const paths = Array.isArray(row.selling_point_image_paths) ? row.selling_point_image_paths : [];
+  return [0, 1, 2].map((i) => storagePublicUrl(ARTIFACTS_BUCKET, paths[i] ?? null));
 }
 
 async function loadRow(requestId: string): Promise<SiteRequest> {
@@ -49,18 +57,24 @@ async function storeHtml(id: string, html: string): Promise<string> {
 }
 
 /**
- * Generate the three bento tile images from the brand's selling points
- * ("the designer" = gpt-image-1). Best-effort: a failed tile falls back to
- * the renderer's decorative art rather than failing the approve.
+ * Ensure each of the three bento cards has an image, returning the effective
+ * Storage path per slot. Slots that already have a path (an admin-attached
+ * image, or one generated on a prior approve) are LEFT UNTOUCHED — only empty
+ * slots are filled by the designer (gpt-image-1). Best-effort: a slot that
+ * can't be generated stays null and falls back to decorative art at render.
  */
-async function generateSellingPointImages(row: SiteRequest, cfg: SiteConfig): Promise<(string | undefined)[]> {
+async function ensureSellingPointImages(row: SiteRequest, cfg: SiteConfig): Promise<(string | null)[]> {
+  const existing = Array.isArray(row.selling_point_image_paths) ? row.selling_point_image_paths : [];
+  const paths: (string | null)[] = [0, 1, 2].map((i) => existing[i] ?? null);
   const points = (cfg.sellingPoints ?? []).map((p) => p.trim()).filter(Boolean).slice(0, 3);
-  if (points.length < 3 || !hasOpenAI()) return [];
+  if (points.length < 3 || !hasOpenAI()) return paths;
+
   const db = createSupabaseAdminClient();
   const accent = cfg.tokens['--ap-olive'] ?? '#3E412E';
   const bg = cfg.tokens['--ap-bg'] ?? '#ECE7DA';
-  return Promise.all(
+  await Promise.all(
     points.map(async (point, i) => {
+      if (paths[i]) return; // keep an admin upload or a previously-generated image
       try {
         const prompt =
           `Premium editorial still-life photograph for a research-peptide brand, illustrating: "${point}". ` +
@@ -68,15 +82,15 @@ async function generateSellingPointImages(row: SiteRequest, cfg: SiteConfig): Pr
           `Muted palette anchored on ${accent} and ${bg}, soft studio light, shallow depth of field. ` +
           `Strictly no people, no faces, no hands, no text, no logos.`;
         const bytes = await generateImageBytes(prompt);
-        const path = `${row.id}/selling-point-${i + 1}.png`;
-        const up = await db.storage.from(ARTIFACTS_BUCKET).upload(path, bytes, { contentType: 'image/png', upsert: true, cacheControl: '0' });
-        if (up.error) return undefined;
-        return db.storage.from(ARTIFACTS_BUCKET).getPublicUrl(path).data.publicUrl;
+        const p = `${row.id}/selling-point-${i + 1}.png`;
+        const up = await db.storage.from(ARTIFACTS_BUCKET).upload(p, bytes, { contentType: 'image/png', upsert: true, cacheControl: '0' });
+        if (!up.error) paths[i] = p;
       } catch {
-        return undefined;
+        /* leave slot null → decorative fallback */
       }
     }),
   );
+  return paths;
 }
 
 /**
@@ -88,11 +102,15 @@ export async function generateHtml(requestId: string): Promise<{ ok: boolean; ht
     const db = createSupabaseAdminClient();
     const row = await loadRow(requestId);
     const cfg = siteConfigFor(row);
-    cfg.sellingPointImages = await generateSellingPointImages(row, cfg);
+    // Fill any empty bento slots (keeps admin uploads + prior generations), then
+    // render + persist the effective paths so re-renders stay lossless.
+    const spPaths = await ensureSellingPointImages(row, cfg);
+    cfg.sellingPointImages = spPaths.map((p) => storagePublicUrl(ARTIFACTS_BUCKET, p));
     const html = renderHomeHtml(cfg);
     const html_url = await storeHtml(row.id, html);
     await db.from('site_requests').update({
-      status: 'approved', html_source: html, html_url, config: cfg, generated_at: new Date().toISOString(),
+      status: 'approved', html_source: html, html_url, config: cfg,
+      selling_point_image_paths: spPaths, generated_at: new Date().toISOString(),
     }).eq('id', row.id);
     return { ok: true, html_url };
   } catch (e) {
@@ -128,15 +146,27 @@ export async function generateBundle(requestId: string): Promise<{ ok: boolean; 
     const hero = await fetchAsset(cfg.heroImageUrl);
 
     const slug = (row.business_name ?? 'site').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'site';
-    const zip = new JSZip();
-    const root = zip.folder(`${slug}-site`)!;
 
-    await addBaseZip(root, 'anchored-peptides.zip', 'theme', warnings);
-    await addBaseZip(root, 'anchored-peptides-homepage.zip', 'plugins', warnings);
-    await addBaseZip(root, 'anchored-peptides-coming-soon.zip', 'plugins', warnings);
-    await addBaseZip(root, 'ap-provisioner.zip', 'plugins', warnings);
+    // WordPress admin installs ONE zip at a time: the theme via Appearance →
+    // Upload Theme, a plugin via Plugins → Upload Plugin. A zip with multiple
+    // plugin folders does NOT install (WP nests them and none activate). So we
+    // ship exactly two uploadable zips: the theme, and ONE consolidated plugin.
 
-    const bc = root.folder('plugins')!.folder('ap-brand-config')!;
+    // 1) Theme zip — the base theme is already a single-folder, installable zip.
+    const themeZipPath = path.join(BUILD_ZIPS, 'anchored-peptides.zip');
+    const themeBytes = fs.existsSync(themeZipPath) ? fs.readFileSync(themeZipPath) : null;
+    if (!themeBytes) warnings.push('theme base zip missing: anchored-peptides.zip');
+
+    // 2) Consolidated plugin zip — one plugin folder `ap-site` whose loader
+    //    requires the homepage, brand-config, and provisioner as modules.
+    const pluginZip = new JSZip();
+    const site = pluginZip.folder('ap-site')!;
+    site.file('ap-site.php', siteLoaderPhp(cfg.brandName));
+    const mods = site.folder('modules')!;
+    await extractZipInto(mods, 'anchored-peptides-homepage.zip', warnings);
+    await extractZipInto(mods, 'ap-provisioner.zip', warnings);
+
+    const bc = mods.folder('ap-brand-config')!;
     bc.file('ap-brand-config.php', generateBrandConfigPlugin({
       brandName: cfg.brandName, tokens: cfg.tokens, fontsUrl: cfg.fonts.url ?? '', copy: cfg.copy,
       hasLogo: !!logo, hasHero: !!hero, hasHomeHtml: true,
@@ -144,9 +174,31 @@ export async function generateBundle(requestId: string): Promise<{ ok: boolean; 
     bc.folder('assets')!.file('home.html', html);
     if (logo) bc.folder('assets')!.file(`logo.${logo.ext}`, logo.bytes);
     if (hero) bc.folder('assets')!.file(`hero.${hero.ext}`, hero.bytes);
+    const pluginBytes = await pluginZip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
 
-    if (fs.existsSync(PRODUCTS_CSV)) root.file('products.csv', fs.readFileSync(PRODUCTS_CSV));
-    else warnings.push('products CSV not found on disk');
+    // 3) Outer bundle: the two uploadable zips + catalog + reference + install guide.
+    const zip = new JSZip();
+    const root = zip.folder(`${slug}-site`)!;
+    if (themeBytes) root.file(`${slug}-theme.zip`, themeBytes);
+    root.file(`${slug}-plugins.zip`, pluginBytes);
+
+    // Per-site catalog: master `products` table minus this site's exclusions,
+    // with designer image URLs in the Images column (WooCommerce sideloads them).
+    // Falls back to the repo CSV if the DB catalog is empty.
+    let csv = await buildProductsCsv(
+      Array.isArray(row.excluded_products) ? row.excluded_products : [],
+    ).catch(() => null);
+    if (!csv && fs.existsSync(PRODUCTS_CSV)) csv = fs.readFileSync(PRODUCTS_CSV, 'utf8');
+    if (csv) {
+      root.file('products.csv', csv);
+      // Publish it too, so the provisioner deploy imports this exact selection.
+      const csvUp = await db.storage.from(ARTIFACTS_BUCKET).upload(`${row.id}/products.csv`, Buffer.from(csv), {
+        contentType: 'text/csv; charset=utf-8', upsert: true, cacheControl: '0',
+      });
+      if (csvUp.error) warnings.push(`products.csv upload: ${csvUp.error.message}`);
+    } else {
+      warnings.push('no products available (DB catalog empty and repo CSV missing)');
+    }
 
     root.file('index.html', html);
     root.file('INSTALL.md', installReadme(slug, cfg.brandName));
@@ -164,15 +216,56 @@ export async function generateBundle(requestId: string): Promise<{ ok: boolean; 
   }
 }
 
-async function addBaseZip(root: JSZip, zipName: string, prefix: string, warnings: string[]) {
+/** Extract a base build-zip into `target`, preserving its single top-level folder. */
+async function extractZipInto(target: JSZip, zipName: string, warnings: string[]) {
   const p = path.join(BUILD_ZIPS, zipName);
   if (!fs.existsSync(p)) { warnings.push(`base bundle missing: ${zipName}`); return; }
   const src = await JSZip.loadAsync(fs.readFileSync(p));
-  const target = root.folder(prefix)!;
   for (const [rel, file] of Object.entries(src.files)) {
     if (file.dir) continue;
     target.file(rel, await file.async('nodebuffer'));
   }
+}
+
+/**
+ * The single wrapper plugin (`ap-site/ap-site.php`) that turns several plugins
+ * into ONE installable plugin. It `require`s each module — their add_action /
+ * add_filter hooks run at include time — but each module's own
+ * register_activation_hook(__FILE__, …) never fires when bundled (its __FILE__
+ * isn't the activated plugin), so we invoke their setup from THIS plugin's
+ * activation hook instead.
+ */
+function siteLoaderPhp(brandName: string): string {
+  const name = (brandName || 'Peptides').replace(/[\r\n*/]/g, ' ').trim();
+  return `<?php
+/**
+ * Plugin Name: ${name} — Site
+ * Description: One-install bundle — homepage, branding, and the REST provisioner for ${name}.
+ * Version: 1.0.0
+ */
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+// Load each bundled module from ap-site/modules/. Their hooks register on include;
+// __FILE__-relative asset paths (APH_URL, plugin_dir_path, …) still resolve since
+// each module keeps its own folder.
+$ap_site_modules = __DIR__ . '/modules';
+foreach ( array(
+    '/anchored-peptides-homepage/anchored-peptides-homepage.php',
+    '/ap-brand-config/ap-brand-config.php',
+    '/ap-provisioner/ap-provisioner.php',
+) as $ap_site_rel ) {
+    $ap_site_file = $ap_site_modules . $ap_site_rel;
+    if ( file_exists( $ap_site_file ) ) { require_once $ap_site_file; }
+}
+
+// Run the modules' one-time setup from this plugin's activation.
+register_activation_hook( __FILE__, 'ap_site_activate' );
+function ap_site_activate() {
+    if ( function_exists( 'aph_activate' ) ) { aph_activate(); }
+    if ( function_exists( 'ap_brand_config_apply' ) ) { ap_brand_config_apply(); }
+    flush_rewrite_rules();
+}
+`;
 }
 
 async function fetchAsset(url?: string): Promise<{ bytes: Buffer; ext: string } | null> {
@@ -189,23 +282,24 @@ async function fetchAsset(url?: string): Promise<{ bytes: Buffer; ext: string } 
 }
 
 function installReadme(slug: string, brand: string): string {
-  return `# ${brand} — WordPress site bundle
+  return `# ${brand} — WordPress install
 
-Everything needed to stand up this store on a fresh WordPress + WooCommerce install.
+Two uploadable zips + the product catalog. Each zip installs through the normal
+WordPress admin uploader (no FTP, no unzipping into wp-content).
 
 ## Contents
-- \`theme/anchored-peptides/\` — the theme (upload to wp-content/themes, activate)
-- \`plugins/anchored-peptides-homepage/\` — homepage template + page/category scaffolding
-- \`plugins/ap-brand-config/\` — applies THIS brand's colors, fonts, copy, logo, hero,
-  and sets the reviewed homepage HTML (assets/home.html) as the front page
-- \`plugins/ap-provisioner/\` — optional REST endpoint for automated deploys
-- \`products.csv\` — the WooCommerce catalog (WooCommerce → Products → Import)
-- \`index.html\` — the approved homepage design
+- \`${slug}-theme.zip\` — the theme
+- \`${slug}-plugins.zip\` — ONE plugin ("${brand} — Site") that bundles the homepage,
+  this brand's config (colors, fonts, copy, logo, hero + the reviewed homepage HTML),
+  and the REST provisioner
+- \`products.csv\` — the WooCommerce catalog
+- \`index.html\` — the approved homepage design (reference only)
 
-## Manual install
+## Install
 1. Ensure WooCommerce is installed + active.
-2. Upload + activate the theme \`anchored-peptides\`.
-3. Upload + activate \`anchored-peptides-homepage\`, then \`ap-brand-config\`.
+2. Appearance → Themes → Add New → Upload Theme → \`${slug}-theme.zip\` → Activate.
+3. Plugins → Add New → Upload Plugin → \`${slug}-plugins.zip\` → Activate.
+   Branding, fonts, logo, hero, and the homepage all apply on activation.
 4. WooCommerce → Products → Import → \`products.csv\`.
 
 The homepage now matches \`index.html\`.

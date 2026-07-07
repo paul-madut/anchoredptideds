@@ -23,6 +23,9 @@ export interface SiteRequest {
   emphasis_categories: string[];
   show_categories: boolean;
   selling_points: string[];
+  /** Effective image path in `site-artifacts` for each selling-point card (index 0..2). */
+  selling_point_image_paths: (string | null)[];
+  excluded_products: string[];
 
   preset_key: string | null;
   tokens: Tokens;

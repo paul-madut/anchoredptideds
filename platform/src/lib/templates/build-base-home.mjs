@@ -80,8 +80,11 @@ for (const [label, href] of Object.entries(A_LINKS)) {
   h = h.replace(re, `<a style="$1" href="${href}">$2</a>`);
 }
 
-// 6c) Buttons/divs/icon-spans → onclick navigation (same mechanism the DC runtime used).
-const nav = (url) => ` onclick="location.href='${url}'"`;
+// 6c) Buttons/divs/icon-spans → onclick navigation (same mechanism the DC runtime
+// used). apGo() (defined in step 11's runtime script) routes to the real WordPress
+// URL when deployed, or smooth-scrolls to the matching section when the file runs
+// standalone (downloaded, admin preview, storage URL).
+const nav = (url) => ` onclick="apGo('${url}')"`;
 const addOnclickToNearest = (marker, openTag, url) => {
   let from = 0;
   while (true) {
@@ -213,6 +216,60 @@ const bento = `<!--AP:BENTO--><section style="background: var(--ap-bg2); border-
   if (storyOpen < 0) console.error('bento: story section not found');
   else h = h.slice(0, storyOpen) + bento + '\n  ' + h.slice(storyOpen);
 }
+
+// 11) Standalone single-file navigation. IDs on the key sections + a tiny router:
+// deployed on WordPress the nav goes to the real pages; opened standalone
+// (file://, admin preview, storage URL, a bare .html) the same clicks
+// smooth-scroll to the matching section, so the single file works on its own.
+function addSectionId(containedText, id) {
+  const at = h.indexOf(containedText);
+  if (at < 0) { console.error(`addSectionId: "${containedText}" not found`); return; }
+  const open = h.lastIndexOf('<section', at);
+  if (open < 0) { console.error(`addSectionId: no <section before "${containedText}"`); return; }
+  h = h.slice(0, open) + `<section id="${id}"` + h.slice(open + '<section'.length);
+}
+addSectionId('Best-selling peptides', 'ap-shop');
+addSectionId('Explore our research resources', 'ap-learn');
+addSectionId('Purity you can verify', 'ap-coa');
+h = h.replace('<header ', '<header id="ap-top" ');
+
+const ROUTER = `
+<script>
+(function () {
+  var MAP = { '/': 'ap-top', '/shop/': 'ap-shop', '/learn/': 'ap-learn', '/coa-library/': 'ap-coa', '/cart/': 'ap-top', '/checkout/': 'ap-top', '/my-account/': 'ap-top' };
+  function standalone() {
+    return location.protocol === 'file:' || location.protocol === 'blob:' ||
+      /\\.supabase\\.(co|in|net)$/.test(location.hostname) ||
+      location.pathname.indexOf('/api/preview') === 0 ||
+      /\\.html?$/.test(location.pathname);
+  }
+  function sectionFor(url) {
+    var id = MAP[url.split('?')[0]];
+    return id ? document.getElementById(id) : null;
+  }
+  function scrollToSection(url) {
+    var el = sectionFor(url);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+    return true;
+  }
+  window.apGo = function (url) {
+    if (standalone()) { scrollToSection(url); return; }
+    location.href = url;
+  };
+  document.addEventListener('click', function (e) {
+    if (!standalone()) return;
+    var n = e.target;
+    while (n && n !== document && !(n.tagName === 'A' && n.getAttribute('href'))) n = n.parentNode;
+    if (!n || n === document) return;
+    var href = n.getAttribute('href');
+    if (!href || href.charAt(0) !== '/') return; // leave #anchors + external links alone
+    e.preventDefault();
+    scrollToSection(href);
+  }, true);
+})();
+<\/script>`;
+h = h.replace('</body>', ROUTER + '\n</body>');
 
 fs.writeFileSync(OUT, h);
 console.error(`base template → ${OUT} (${(h.length / 1024).toFixed(0)} KB)`);

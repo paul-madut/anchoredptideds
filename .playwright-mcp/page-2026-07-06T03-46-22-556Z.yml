@@ -1,0 +1,430 @@
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Third-Party HPLC Tested
+      - generic [ref=e9]: ◆
+    - generic [ref=e10]:
+      - generic [ref=e11]: Free Shipping Over $300
+      - generic [ref=e12]: ◆
+    - generic [ref=e13]:
+      - generic [ref=e14]: Same-Day Dispatch Before 2 PM
+      - generic [ref=e15]: ◆
+    - generic [ref=e16]:
+      - generic [ref=e17]: Trusted by 20,000+ Researchers
+      - generic [ref=e18]: ◆
+    - generic [ref=e19]:
+      - generic [ref=e20]: For Research Use Only
+      - generic [ref=e21]: ◆
+    - generic [ref=e22]:
+      - generic [ref=e23]: Fast Dispatch
+      - generic [ref=e24]: ◆
+    - generic [ref=e25]:
+      - generic [ref=e26]: Third-Party HPLC Tested
+      - generic [ref=e27]: ◆
+    - generic [ref=e28]:
+      - generic [ref=e29]: Free Shipping Over $300
+      - generic [ref=e30]: ◆
+    - generic [ref=e31]:
+      - generic [ref=e32]: Same-Day Dispatch Before 2 PM
+      - generic [ref=e33]: ◆
+    - generic [ref=e34]:
+      - generic [ref=e35]: Trusted by 20,000+ Researchers
+      - generic [ref=e36]: ◆
+    - generic [ref=e37]:
+      - generic [ref=e38]: For Research Use Only
+      - generic [ref=e39]: ◆
+    - generic [ref=e40]:
+      - generic [ref=e41]: Fast Dispatch
+      - generic [ref=e42]: ◆
+  - banner [ref=e43]:
+    - generic [ref=e44]:
+      - link "A Ardentis Compounds" [ref=e45] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e46]: A
+        - generic [ref=e47]: Ardentis Compounds
+      - navigation [ref=e48]:
+        - link "Shop" [ref=e49] [cursor=pointer]:
+          - /url: /shop/
+        - link "Learn" [ref=e50] [cursor=pointer]:
+          - /url: /learn/
+        - link "COAs & Testing" [ref=e51] [cursor=pointer]:
+          - /url: /coa-library/
+        - link "Help & Support" [ref=e52] [cursor=pointer]:
+          - /url: /learn/
+      - generic [ref=e53]:
+        - generic [ref=e54] [cursor=pointer]: ⚲
+        - generic [ref=e55] [cursor=pointer]: ⚹
+        - button "🛒" [ref=e56] [cursor=pointer]
+  - main [ref=e57]:
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - generic [ref=e63]: Research Materials
+          - heading "Precision. Purity. Purpose. Stay Grounded" [level=1] [ref=e64]:
+            - text: Precision. Purity. Purpose.
+            - text: Stay Grounded
+          - paragraph [ref=e65]: High-purity research compounds supported by transparent testing and uncompromising quality standards.
+          - generic [ref=e66]:
+            - button "View Products" [ref=e67] [cursor=pointer]
+            - button "Learn More" [ref=e68] [cursor=pointer]
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - generic [ref=e71]: 99.9%
+              - generic [ref=e72]: PURITY
+            - generic [ref=e74]:
+              - generic [ref=e75]: 20k+
+              - generic [ref=e76]: RESEARCHERS
+            - generic [ref=e78]:
+              - generic [ref=e79]: 24h
+              - generic [ref=e80]: DISPATCH
+        - generic [ref=e81]:
+          - img "Ardentis Compounds research peptides" [ref=e83]
+          - generic [ref=e84]:
+            - generic [ref=e85]: ✓
+            - generic [ref=e86]:
+              - generic [ref=e87]: HPLC Verified
+              - generic [ref=e88]: Batch COA available
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - img [ref=e92]
+          - generic [ref=e95]:
+            - generic [ref=e96]: Third-Party HPLC Tested
+            - generic [ref=e97]: COA for every batch
+        - generic [ref=e98]:
+          - img [ref=e99]
+          - generic [ref=e102]:
+            - generic [ref=e103]: Fast Dispatch
+            - generic [ref=e104]: No customs delays
+        - generic [ref=e105]:
+          - img [ref=e106]
+          - generic [ref=e109]:
+            - generic [ref=e110]: Same-Day Dispatch
+            - generic [ref=e111]: Order before 2 PM ET
+        - generic [ref=e112]:
+          - img [ref=e113]
+          - generic [ref=e116]:
+            - generic [ref=e117]: Reship Guarantee
+            - generic [ref=e118]: Lost-package protection
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - generic [ref=e122]: Browse by goal
+            - heading "Find your research category" [level=2] [ref=e123]
+          - link "View all 40+ →" [ref=e124] [cursor=pointer]:
+            - /url: /shop/
+        - generic [ref=e125]:
+          - button "✚ Healing & Recovery 6 products" [ref=e126] [cursor=pointer]:
+            - generic [ref=e127]: ✚
+            - generic [ref=e128]:
+              - generic [ref=e129]: Healing & Recovery
+              - generic [ref=e130]: 6 products
+          - button "▲ Growth Hormone 9 products" [ref=e131] [cursor=pointer]:
+            - generic [ref=e132]: ▲
+            - generic [ref=e133]:
+              - generic [ref=e134]: Growth Hormone
+              - generic [ref=e135]: 9 products
+          - button "◉ Metabolic 9 products" [ref=e136] [cursor=pointer]:
+            - generic [ref=e137]: ◉
+            - generic [ref=e138]:
+              - generic [ref=e139]: Metabolic
+              - generic [ref=e140]: 9 products
+          - button "⚡ Cognitive 6 products" [ref=e141] [cursor=pointer]:
+            - generic [ref=e142]: ⚡
+            - generic [ref=e143]:
+              - generic [ref=e144]: Cognitive
+              - generic [ref=e145]: 6 products
+          - button "✦ Cosmetic 4 products" [ref=e146] [cursor=pointer]:
+            - generic [ref=e147]: ✦
+            - generic [ref=e148]:
+              - generic [ref=e149]: Cosmetic
+              - generic [ref=e150]: 4 products
+          - button "∞ Longevity 4 products" [ref=e151] [cursor=pointer]:
+            - generic [ref=e152]: ∞
+            - generic [ref=e153]:
+              - generic [ref=e154]: Longevity
+              - generic [ref=e155]: 4 products
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e159]: Weekly Top 10
+            - heading "Best-selling peptides" [level=2] [ref=e160]
+          - link "Shop all →" [ref=e161] [cursor=pointer]:
+            - /url: /shop/
+        - generic [ref=e162]:
+          - generic [ref=e163] [cursor=pointer]:
+            - generic [ref=e164]:
+              - generic [ref=e165]: Best Seller
+              - generic [ref=e166]: ♡
+              - generic [ref=e173]: BPC-157
+            - generic [ref=e175]:
+              - generic [ref=e176]: Healing & Recovery
+              - generic [ref=e177]: BPC-157
+              - generic [ref=e178]:
+                - generic [ref=e179]: ★★★★★
+                - generic [ref=e180]: "412"
+              - generic [ref=e181]:
+                - generic [ref=e182]: $92.99
+                - generic [ref=e183]: $102.99
+          - generic [ref=e184] [cursor=pointer]:
+            - generic [ref=e185]:
+              - generic [ref=e186]: Best Seller
+              - generic [ref=e187]: ♡
+              - generic [ref=e194]: BPC-157 + TB-
+            - generic [ref=e196]:
+              - generic [ref=e197]: Blends
+              - generic [ref=e198]: BPC-157 + TB-500
+              - generic [ref=e199]:
+                - generic [ref=e200]: ★★★★★
+                - generic [ref=e201]: "198"
+              - generic [ref=e202]:
+                - generic [ref=e203]: $176.99
+                - generic [ref=e204]: $199.99
+          - generic [ref=e205] [cursor=pointer]:
+            - generic [ref=e206]:
+              - generic [ref=e207]: Best Seller
+              - generic [ref=e208]: ♡
+              - generic [ref=e215]: GHK-Cu
+            - generic [ref=e217]:
+              - generic [ref=e218]: Cosmetic
+              - generic [ref=e219]: GHK-Cu
+              - generic [ref=e220]:
+                - generic [ref=e221]: ★★★★★
+                - generic [ref=e222]: "341"
+              - generic [ref=e223]:
+                - generic [ref=e224]: $49.99
+                - generic [ref=e225]: $59.99
+          - generic [ref=e226] [cursor=pointer]:
+            - generic [ref=e227]:
+              - generic [ref=e228]: Best Seller
+              - generic [ref=e229]: ♡
+              - generic [ref=e236]: CJC-1295 + Ip
+            - generic [ref=e238]:
+              - generic [ref=e239]: Growth Hormone
+              - generic [ref=e240]: CJC-1295 + Ipamorelin
+              - generic [ref=e241]:
+                - generic [ref=e242]: ★★★★★
+                - generic [ref=e243]: "254"
+              - generic [ref=e244]:
+                - generic [ref=e245]: $94.99
+                - generic [ref=e246]: $104.99
+          - generic [ref=e247] [cursor=pointer]:
+            - generic [ref=e248]:
+              - generic [ref=e249]: Best Seller
+              - generic [ref=e250]: ♡
+              - generic [ref=e257]: Klow
+            - generic [ref=e259]:
+              - generic [ref=e260]: Blends
+              - generic [ref=e261]: Klow
+              - generic [ref=e262]:
+                - generic [ref=e263]: ★★★★★
+                - generic [ref=e264]: "77"
+              - generic [ref=e265]:
+                - generic [ref=e266]: $179.99
+                - generic [ref=e267]: $249.99
+          - generic [ref=e268] [cursor=pointer]:
+            - generic [ref=e269]:
+              - generic [ref=e270]: Best Seller
+              - generic [ref=e271]: ♡
+              - generic [ref=e278]: Retatrutide
+            - generic [ref=e280]:
+              - generic [ref=e281]: Metabolic
+              - generic [ref=e282]: Retatrutide
+              - generic [ref=e283]:
+                - generic [ref=e284]: ★★★★★
+                - generic [ref=e285]: "213"
+              - generic [ref=e287]: $159.99
+          - generic [ref=e288] [cursor=pointer]:
+            - generic [ref=e289]:
+              - generic [ref=e290]: Best Seller
+              - generic [ref=e291]: ♡
+              - generic [ref=e298]: Tirzepatide
+            - generic [ref=e300]:
+              - generic [ref=e301]: Metabolic
+              - generic [ref=e302]: Tirzepatide
+              - generic [ref=e303]:
+                - generic [ref=e304]: ★★★★★
+                - generic [ref=e305]: "287"
+              - generic [ref=e307]: $149.99
+          - generic [ref=e308] [cursor=pointer]:
+            - generic [ref=e309]:
+              - generic [ref=e310]: Best Seller
+              - generic [ref=e311]: ♡
+              - generic [ref=e318]: Semaglutide
+            - generic [ref=e320]:
+              - generic [ref=e321]: Metabolic
+              - generic [ref=e322]: Semaglutide
+              - generic [ref=e323]:
+                - generic [ref=e324]: ★★★★★
+                - generic [ref=e325]: "331"
+              - generic [ref=e327]: $129.99
+          - generic [ref=e328] [cursor=pointer]:
+            - generic [ref=e329]:
+              - generic [ref=e330]: ♡
+              - generic [ref=e337]: Bacteriostati
+            - generic [ref=e339]:
+              - generic [ref=e340]: Accessories
+              - generic [ref=e341]: Bacteriostatic Water
+              - generic [ref=e342]:
+                - generic [ref=e343]: ★★★★★
+                - generic [ref=e344]: "401"
+              - generic [ref=e346]: $14.99
+          - generic [ref=e347] [cursor=pointer]:
+            - generic [ref=e348]:
+              - generic [ref=e349]: ♡
+              - generic [ref=e356]: Alcohol Wipes
+            - generic [ref=e358]:
+              - generic [ref=e359]: Accessories
+              - generic [ref=e360]: Alcohol Wipes (100pk)
+              - generic [ref=e361]:
+                - generic [ref=e362]: ★★★★★
+                - generic [ref=e363]: "356"
+              - generic [ref=e365]: $9.99
+        - button "See All Products →" [ref=e367] [cursor=pointer]
+      - generic [ref=e369]:
+        - generic [ref=e370]:
+          - generic [ref=e371]: The Difference
+          - heading "Why researchers choose Ardentis Compounds" [level=2] [ref=e372]
+        - generic [ref=e373]:
+          - generic [ref=e378]: Every batch independently HPLC-tested at accredited labs, with full Certificates of Analysis (COAs) published and no redactions.
+          - generic [ref=e379]:
+            - generic [ref=e384]: Certificates of Analysis are linked on every product page so purity can be verified before every order.
+            - generic [ref=e389]: Strict batch traceability from synthesis through fulfillment, with packaging designed to preserve stability.
+      - generic [ref=e391]:
+        - generic [ref=e392]: Why We're Here
+        - heading "Why we started — and never looked back" [level=2] [ref=e393]:
+          - text: Why we started —
+          - text: and never looked back
+        - generic [ref=e394]:
+          - paragraph [ref=e395]: "We started with a simple frustration: it was too hard to find research peptides you could actually trust. Inconsistent labeling, no real testing, slow shipping. We knew serious researchers deserved better."
+          - paragraph [ref=e396]: So we built a source held to a higher standard — independent HPLC and mass-spec testing on every batch, honest labeling, and fast, dependable fulfillment. What you order is exactly what arrives.
+          - paragraph [ref=e397]: "Our mission is straightforward: give researchers materials they can rely on, and the data to back them up — every order, every time."
+        - generic [ref=e399]: Research use only. Not for human consumption.
+      - generic [ref=e401]:
+        - generic [ref=e402]:
+          - generic [ref=e403]: The Ardentis Compounds Standard
+          - heading "Purity you can verify, not just trust." [level=2] [ref=e404]
+          - paragraph [ref=e405]: Every batch is independently HPLC and mass-spec tested before it ships. Scan the lot number on your vial to pull the exact certificate of analysis for what's in your hand.
+          - button "See our testing process" [ref=e406] [cursor=pointer]
+        - generic [ref=e407]:
+          - generic [ref=e408]:
+            - generic [ref=e409]: 99.9%
+            - generic [ref=e410]: Verified Purity
+            - generic [ref=e411]: HPLC + mass-spec on every lot
+          - generic [ref=e412]:
+            - generic [ref=e413]: 104%
+            - generic [ref=e414]: Honest Fill
+            - generic [ref=e415]: Vials filled above label weight
+          - generic [ref=e416]:
+            - generic [ref=e417]: 24h
+            - generic [ref=e418]: Fast Dispatch
+            - generic [ref=e419]: Same-day before 2 PM ET
+          - generic [ref=e420]:
+            - generic [ref=e421]: 100%
+            - generic [ref=e422]: In-house
+            - generic [ref=e423]: Reliable fulfillment & support
+      - generic [ref=e424]:
+        - generic [ref=e425]:
+          - generic [ref=e426]: Knowledge Hub
+          - heading "Explore our research resources" [level=2] [ref=e427]
+        - generic [ref=e428]:
+          - generic [ref=e429]:
+            - generic [ref=e431]: ▤
+            - generic [ref=e432]: Batch-Tested COA Reports
+            - generic [ref=e433]: Look up the exact certificate of analysis for the lot number printed on your vial.
+            - link "View COAs →" [ref=e434] [cursor=pointer]:
+              - /url: /coa-library/
+          - generic [ref=e435]:
+            - generic [ref=e437]: ✎
+            - generic [ref=e438]: Peptide Learning Centre
+            - generic [ref=e439]: Plain-language guides on what each compound is studied for, sourcing, and handling.
+            - link "Start learning →" [ref=e440] [cursor=pointer]:
+              - /url: /learn/
+          - generic [ref=e441]:
+            - generic [ref=e443]: ⌗
+            - generic [ref=e444]: Research Resource Library
+            - generic [ref=e445]: Storage, reconstitution, and dosing-calculator tools built for the bench.
+            - link "Explore tools →" [ref=e446] [cursor=pointer]:
+              - /url: /learn/
+      - generic [ref=e448]:
+        - generic [ref=e449]:
+          - generic [ref=e450]: ★★★★★
+          - generic [ref=e451]: 4.9 / 5 from 6,200+ verified researchers
+        - generic [ref=e452]:
+          - generic [ref=e453]:
+            - text: ★★★★★
+            - paragraph [ref=e454]: COAs match every batch and dispatch is genuinely same-day. The only In-house source I reorder from.
+            - generic [ref=e455]:
+              - generic [ref=e457]: MR
+              - generic [ref=e458]:
+                - generic [ref=e459]: Dr. M. Reyes
+                - generic [ref=e460]: Verified Buyer
+          - generic [ref=e461]:
+            - text: ★★★★★
+            - paragraph [ref=e462]: Packaging is clean, labeling is consistent, and the lot lookup actually works. Exactly what research ordering should feel like.
+            - generic [ref=e463]:
+              - generic [ref=e465]: JW
+              - generic [ref=e466]:
+                - generic [ref=e467]: J. Whitfield
+                - generic [ref=e468]: Verified Buyer
+          - generic [ref=e469]:
+            - text: ★★★★★
+            - paragraph [ref=e470]: Switched over from an overseas vendor. No customs headaches, arrived in three days, purity was spot on.
+            - generic [ref=e471]:
+              - generic [ref=e473]: AK
+              - generic [ref=e474]:
+                - generic [ref=e475]: A. Kovac
+                - generic [ref=e476]: Verified Buyer
+      - generic [ref=e477]:
+        - heading "Join the research list" [level=2] [ref=e478]
+        - paragraph [ref=e479]: New batch COAs, restocks, and member-only pricing. No noise.
+        - generic [ref=e480]:
+          - textbox "you@lab.com" [ref=e481]
+          - button "Subscribe" [ref=e482] [cursor=pointer]
+  - contentinfo [ref=e483]:
+    - generic [ref=e485]:
+      - generic [ref=e486]:
+        - generic [ref=e487]:
+          - generic [ref=e488]: ⚓
+          - generic [ref=e489]: Ardentis Compounds
+        - paragraph [ref=e490]: A trusted source for third-party HPLC-tested research peptides, shipped fast from our own fulfillment centre.
+        - generic [ref=e491]:
+          - text: For laboratory & research use only.
+          - text: Not for human consumption.
+      - generic [ref=e492]:
+        - generic [ref=e493]: Shop
+        - generic [ref=e494]:
+          - link "All Peptides" [ref=e495] [cursor=pointer]:
+            - /url: /shop/
+          - link "Best Sellers" [ref=e496] [cursor=pointer]:
+            - /url: /shop/
+          - link "Blends" [ref=e497] [cursor=pointer]:
+            - /url: /shop/?category=stacks
+          - link "Nasal Sprays" [ref=e498] [cursor=pointer]:
+            - /url: /shop/
+          - link "Accessories" [ref=e499] [cursor=pointer]:
+            - /url: /shop/?category=supplies
+      - generic [ref=e500]:
+        - generic [ref=e501]: Learn
+        - generic [ref=e502]:
+          - link "Peptide Learning Centre" [ref=e503] [cursor=pointer]:
+            - /url: /learn/
+          - link "COA Lookup" [ref=e504] [cursor=pointer]:
+            - /url: /coa-library/
+          - link "Dosing Calculator" [ref=e505] [cursor=pointer]:
+            - /url: /learn/
+          - link "Storage & Handling" [ref=e506] [cursor=pointer]:
+            - /url: /learn/
+      - generic [ref=e507]:
+        - generic [ref=e508]: Support
+        - generic [ref=e509]:
+          - link "Shipping & Delivery" [ref=e510] [cursor=pointer]:
+            - /url: /learn/
+          - link "Payment Instructions" [ref=e511] [cursor=pointer]:
+            - /url: /learn/
+          - link "Returns & Reships" [ref=e512] [cursor=pointer]:
+            - /url: /learn/
+          - link "Contact Us" [ref=e513] [cursor=pointer]:
+            - /url: /my-account/
+    - generic [ref=e515]:
+      - generic [ref=e516]: © 2026 Ardentis Compounds. All rights reserved.
+      - generic [ref=e517]: Secure checkout · Same-day dispatch · Fast shipping
